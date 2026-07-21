@@ -1,2 +1,2 @@
 # VRIS
-Unity 2D Bossfight RPG Adventure
+Unity 2D BOSSFIGHT-RPG Adventure
