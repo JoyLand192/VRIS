@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 8f96a0b6dc7834f48908ae888baec934
+guid: f52e8300680f44a4fa480c78e7434cdd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - surfaceLayerMaskSettings: {fileID: 11400000, guid: 1ce396d0532087847a900934faa0f450, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
