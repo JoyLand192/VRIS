@@ -16,9 +16,9 @@ public class CRMovement : MonoBehaviour
     private const float jumpDashInterval = 0.05f;
     private const float jumpDashVelocityX = 28f;
     private const float jumpDashVelocityTime = 0.15f;
-    private const float wallSlideVelocityY = 3.5f; 
+    private const float wallSlideVelocityY = 3.5f;
 
-    private const float platformRayLength = 0.25f;
+    private const float platformRayLength = 0.1f;
     private const float wallRayLength = 0.15f;
     private const float groundedVelocityThreshold = 0.35f;
     [SerializeField] private SurfaceLayerMaskSettings surfaceLayerMaskSettings;
@@ -28,7 +28,8 @@ public class CRMovement : MonoBehaviour
     private float moveXInertia = 0f;
     private bool jumpTrigger = false;
     private bool dashTrigger = false;
-    private bool isSprinting = false;
+    [SerializeField] private bool isSprinting = false;
+    [SerializeField] private float UNITY;
     private bool isDashing = false;
     private int availableJumpCount = tempCRJumpCount;
     private Rigidbody2D rb;
@@ -59,7 +60,7 @@ public class CRMovement : MonoBehaviour
         inputHandler.OnHorizontalInput += OnHorizontalInput;
         inputHandler.OnJumpInput += OnJumpInput;
         inputHandler.OnDashInput += OnDashInput;
-        inputHandler.OnDashCancel += OnDashCancel;
+        inputHandler.OnSprintInput += OnSprintInput;
     }
     //   KeyInputHandler   ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ|
     private void OnHorizontalInput(float value)
@@ -70,13 +71,16 @@ public class CRMovement : MonoBehaviour
         if (moveXInertia > 0) return;
 
         moveRatio = value;
-    }   
-    private void OnJumpInput()
-    {
-        jumpTrigger = true;
     }
+    private void OnSprintInput(float value)
+    {
+        UNITY = value;
+
+        if (isDashing) return;
+        isSprinting = value > 0;
+    }
+    private void OnJumpInput() => jumpTrigger = true;
     private void OnDashInput() => dashTrigger = true;
-    private void OnDashCancel() => isSprinting = false;
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     private void FixedUpdate()
     {
@@ -135,7 +139,7 @@ public class CRMovement : MonoBehaviour
         if (!jumpTrigger) return;
         jumpTrigger = false;
 
-        if (!IsMovable) return;
+        if (!IsMovable | isDashing) return;
         if (CurrentContact == SurfaceContact.WALLCONTACT)
         {
             WallJump();
@@ -164,21 +168,9 @@ public class CRMovement : MonoBehaviour
         if (!dashTrigger) return;
         dashTrigger = false;
 
-        switch (CurrentContact)
-        {
-            case SurfaceContact.GROUNDED:
-                {
-                    isSprinting = true;
-                    break;
-                }
-            case SurfaceContact.AIRBORNE:
-                {
-                    if (availableJumpCount < 1) return;
-                    JumpDash().Forget();
-
-                    break;
-                }
-        }
+        if (CurrentContact != SurfaceContact.AIRBORNE) return;
+        if (availableJumpCount < 1) return;
+        JumpDash().Forget();
     }
     private async UniTask JumpDash()
     {

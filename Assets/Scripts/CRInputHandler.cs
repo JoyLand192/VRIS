@@ -7,17 +7,23 @@ public class CRInputHandler : MonoBehaviour
 {
     private MovementActions moveActions;
     private MovementActions.CRMovementActions crMovement;
+    public System.Action<Vector2> OnDPadInput;
     public System.Action<float> OnHorizontalInput;
+    public System.Action<float> OnSprintInput;
     public System.Action OnJumpInput;
     public System.Action OnDashInput;
-    public System.Action OnDashCancel;
     private void OnEnable()
     {
         InputInitialize();
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         InputDispose();
+    }
+    private void Update()
+    {
+        OnHorizontalInput?.Invoke(crMovement.Move.ReadValue<float>());
+        OnSprintInput?.Invoke(crMovement.Sprint.ReadValue<float>());
     }
     private void InputInitialize()
     {
@@ -26,23 +32,23 @@ public class CRInputHandler : MonoBehaviour
 
         moveActions.Enable();
 
+        crMovement.DPad.performed += DPadHandler;
+        crMovement.DPad.canceled += DPadHandler;
+
         crMovement.Jump.performed += JumpKeyHandler;
         crMovement.Dash.performed += DashKeyHandler;
-        crMovement.Dash.canceled += DashCancelHandler;
     }
     private void InputDispose()
     {
         moveActions.Disable();
 
-        crMovement.Jump.performed -= JumpKeyHandler;                         
+        crMovement.DPad.performed -= DPadHandler;
+        crMovement.DPad.canceled -= DPadHandler;
+
+        crMovement.Jump.performed -= JumpKeyHandler;
         crMovement.Dash.performed -= DashKeyHandler;
-        crMovement.Dash.canceled -= DashCancelHandler;
     }
-    private void Update()
-    {
-        OnHorizontalInput?.Invoke(crMovement.Move.ReadValue<float>());
-    }
+    private void DPadHandler(InputAction.CallbackContext context) => OnDPadInput?.Invoke(context.ReadValue<Vector2>());
     private void JumpKeyHandler(InputAction.CallbackContext context) => OnJumpInput?.Invoke();
     private void DashKeyHandler(InputAction.CallbackContext context) => OnDashInput?.Invoke();
-    private void DashCancelHandler(InputAction.CallbackContext context) => OnDashCancel?.Invoke();
 }

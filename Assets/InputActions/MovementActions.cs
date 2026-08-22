@@ -93,19 +93,10 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             ""id"": ""7bc1afa3-cff7-46fc-887a-be9657d9f443"",
             ""actions"": [
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Sprint"",
                     ""type"": ""Button"",
-                    ""id"": ""c903d1ef-ec0f-4066-ade7-54a9b00f9621"",
+                    ""id"": ""4e5c4434-2087-47c6-b436-eef215f6c546"",
                     ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""dbcc1238-7c30-4a57-8ce6-06888330155a"",
-                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -118,12 +109,105 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DPad"",
+                    ""type"": ""Value"",
+                    ""id"": ""6777961f-a833-44dd-81ab-45f8dff52a36"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4c7c827-da60-41c4-a2f1-cb511f632c9a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""99c90186-d941-4599-81e6-c7df4550e6a9"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""2e9b9706-5cbf-49f0-9dd6-851a3a24a4ec"",
+                    ""id"": ""82ea2a62-a9d0-4075-8a3b-c2e407b01155"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b6df8ecd-26c9-4fcf-bf1a-3df3582cdbd2"",
+                    ""path"": ""2DVector(mode=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPad"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""53c4c1ca-bf23-4921-9c24-9b29064e4b2a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""81f26ab6-f294-4afa-a3f9-fbe48e5cf246"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8acd94b0-4587-4398-b449-fa10ce7ff13e"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""8998489c-8b92-4089-9b08-59dcab90de2c"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab0fb9e9-63b7-4bbd-a2f4-3cb48fdb19d0"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -134,7 +218,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""1D Axis"",
-                    ""id"": ""1c5c76e2-396e-43a4-ba2e-30de2f8ab093"",
+                    ""id"": ""5796121a-f102-4a5f-a661-f8250891fbb9"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -145,7 +229,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""70026ddb-ea03-4525-81a9-287ce16c74ec"",
+                    ""id"": ""518d88ff-1452-4652-9136-8e03540b9491"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -156,7 +240,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""bc3669ff-378c-4859-a7b3-09094115b587"",
+                    ""id"": ""dab60595-9784-4536-9f56-35751d812e99"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -167,12 +251,12 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""82ea2a62-a9d0-4075-8a3b-c2e407b01155"",
+                    ""id"": ""6984e1de-df65-480e-ad7e-220a387ea1a9"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -195,9 +279,11 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
 }");
         // CRMovement
         m_CRMovement = asset.FindActionMap("CRMovement", throwIfNotFound: true);
+        m_CRMovement_Sprint = m_CRMovement.FindAction("Sprint", throwIfNotFound: true);
+        m_CRMovement_Dash = m_CRMovement.FindAction("Dash", throwIfNotFound: true);
+        m_CRMovement_DPad = m_CRMovement.FindAction("DPad", throwIfNotFound: true);
         m_CRMovement_Jump = m_CRMovement.FindAction("Jump", throwIfNotFound: true);
         m_CRMovement_Move = m_CRMovement.FindAction("Move", throwIfNotFound: true);
-        m_CRMovement_Dash = m_CRMovement.FindAction("Dash", throwIfNotFound: true);
     }
 
     ~@MovementActions()
@@ -278,9 +364,11 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
     // CRMovement
     private readonly InputActionMap m_CRMovement;
     private List<ICRMovementActions> m_CRMovementActionsCallbackInterfaces = new List<ICRMovementActions>();
+    private readonly InputAction m_CRMovement_Sprint;
+    private readonly InputAction m_CRMovement_Dash;
+    private readonly InputAction m_CRMovement_DPad;
     private readonly InputAction m_CRMovement_Jump;
     private readonly InputAction m_CRMovement_Move;
-    private readonly InputAction m_CRMovement_Dash;
     /// <summary>
     /// Provides access to input actions defined in input action map "CRMovement".
     /// </summary>
@@ -293,6 +381,18 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         /// </summary>
         public CRMovementActions(@MovementActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
+        /// Provides access to the underlying input action "CRMovement/Sprint".
+        /// </summary>
+        public InputAction @Sprint => m_Wrapper.m_CRMovement_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "CRMovement/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_CRMovement_Dash;
+        /// <summary>
+        /// Provides access to the underlying input action "CRMovement/DPad".
+        /// </summary>
+        public InputAction @DPad => m_Wrapper.m_CRMovement_DPad;
+        /// <summary>
         /// Provides access to the underlying input action "CRMovement/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_CRMovement_Jump;
@@ -300,10 +400,6 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "CRMovement/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_CRMovement_Move;
-        /// <summary>
-        /// Provides access to the underlying input action "CRMovement/Dash".
-        /// </summary>
-        public InputAction @Dash => m_Wrapper.m_CRMovement_Dash;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -330,15 +426,21 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CRMovementActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CRMovementActionsCallbackInterfaces.Add(instance);
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @DPad.started += instance.OnDPad;
+            @DPad.performed += instance.OnDPad;
+            @DPad.canceled += instance.OnDPad;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Dash.started += instance.OnDash;
-            @Dash.performed += instance.OnDash;
-            @Dash.canceled += instance.OnDash;
         }
 
         /// <summary>
@@ -350,15 +452,21 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         /// <seealso cref="CRMovementActions" />
         private void UnregisterCallbacks(ICRMovementActions instance)
         {
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @DPad.started -= instance.OnDPad;
+            @DPad.performed -= instance.OnDPad;
+            @DPad.canceled -= instance.OnDPad;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Dash.started -= instance.OnDash;
-            @Dash.performed -= instance.OnDash;
-            @Dash.canceled -= instance.OnDash;
         }
 
         /// <summary>
@@ -413,6 +521,27 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
     public interface ICRMovementActions
     {
         /// <summary>
+        /// Method invoked when associated input action "Sprint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DPad" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDPad(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -426,12 +555,5 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDash(InputAction.CallbackContext context);
     }
 }
