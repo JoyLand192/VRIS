@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "MovementActions",
+    "name": "CRActions",
     "maps": [
         {
             "name": "CRMovement",
@@ -28,7 +28,7 @@
                     "name": "DPad",
                     "type": "Value",
                     "id": "6777961f-a833-44dd-81ab-45f8dff52a36",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Dpad",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -46,6 +46,15 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "99c90186-d941-4599-81e6-c7df4550e6a9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AttackKey",
+                    "type": "Value",
+                    "id": "94205130-b322-4486-82ee-d63442e14d84",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -171,6 +180,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ab9fde1-fbfe-4079-b842-6e249a411d21",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "",
+                    "action": "AttackKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da0a0c26-9b1b-4a27-9a7c-3816cd625919",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "",
+                    "action": "AttackKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "543bf1f9-e653-4bcd-941d-0162ebd41751",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "",
+                    "action": "AttackKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "010885e6-9b5c-4b87-94fe-e28c7e5b6dbc",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "",
+                    "action": "AttackKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

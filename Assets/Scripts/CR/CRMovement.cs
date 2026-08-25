@@ -28,8 +28,7 @@ public class CRMovement : MonoBehaviour
     private float moveXInertia = 0f;
     private bool jumpTrigger = false;
     private bool dashTrigger = false;
-    [SerializeField] private bool isSprinting = false;
-    [SerializeField] private float UNITY;
+    private bool isSprinting = false;
     private bool isDashing = false;
     private int availableJumpCount = tempCRJumpCount;
     private Rigidbody2D rb;
@@ -74,8 +73,6 @@ public class CRMovement : MonoBehaviour
     }
     private void OnSprintInput(float value)
     {
-        UNITY = value;
-
         if (isDashing) return;
         isSprinting = value > 0;
     }

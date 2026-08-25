@@ -873,6 +873,7 @@ GameObject:
   - component: {fileID: 1139047054}
   - component: {fileID: 1139047050}
   - component: {fileID: 1139047053}
+  - component: {fileID: 1139047055}
   m_Layer: 0
   m_Name: CR
   m_TagString: Untagged
@@ -1059,6 +1060,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 1139047050}
   inputHandler: {fileID: 1139047053}
+  skillCaster: {fileID: 1139047055}
+--- !u!114 &1139047055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139047047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847c5e6ed24d0a84aa5ba005945ee885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableCommands:
+  - {fileID: 11400000, guid: 1de1b05876ac06e408fc14e75ea3adbe, type: 2}
 --- !u!1 &1288590060
 GameObject:
   m_ObjectHideFlags: 0

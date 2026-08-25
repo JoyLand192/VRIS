@@ -18,10 +18,13 @@ public class CR : MonoBehaviour
 {
     [SerializeField] private CRMovement movement;
     [SerializeField] private CRInputHandler inputHandler;
+    [SerializeField] private CRSkillCaster skillCaster;
     public CRMovement Movement => movement;
     public CRInputHandler InputHandler => inputHandler;
+    public CRSkillCaster SkillCaster => skillCaster;
     private void Awake()
     {
         movement.Initialize(inputHandler);
+        skillCaster.Initialize(inputHandler);
     }
 }
