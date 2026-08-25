@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ae9ffe4386c7445a2ad4d02ed37da8, type: 3}
-  m_Name: 236P
+  m_Name: 6P
   m_EditorClassIdentifier: 
-  commandName: 236P
+  commandName: 6P
   commandInputBufferTime: 0.5
-  priority: 5
-  sequence: 02000000030000000600000064000000
+  priority: 2
+  inputRequirement: 1
+  sequence: 64000000

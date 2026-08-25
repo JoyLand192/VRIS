@@ -30,6 +30,10 @@ public class CRInputHandler : MonoBehaviour
 {
     private CRActions moveActions;
     private CRActions.CRMovementActions crMovement;
+    private Vector2 dPadInput;
+    public bool IsHoldingLeft => dPadInput.x < 0;
+    public bool IsHoldingRight => dPadInput.x > 0;
+    public bool IsHoldingDown => dPadInput.y < 0;
     public System.Action<CommandInputEntry> OnCommandKeyInput;
     public System.Action<Vector2> OnDPadInput;
     public System.Action<float> OnHorizontalInput;
@@ -76,27 +80,27 @@ public class CRInputHandler : MonoBehaviour
     }
     private void DPadHandler(InputAction.CallbackContext context)
     {
-        var performedValue = context.ReadValue<Vector2>();
-        OnDPadInput?.Invoke(performedValue);
+        dPadInput = context.ReadValue<Vector2>();
+        OnDPadInput?.Invoke(dPadInput);
 
         var dPadCommandKey = CommandKey.Neutral;
 
-        if (performedValue.x == 1)
+        if (dPadInput.x == 1)
         {
-            if (performedValue.y == 1) dPadCommandKey = CommandKey.RightUp;
-            else if (performedValue.y == -1) dPadCommandKey = CommandKey.RightDown;
+            if (dPadInput.y == 1) dPadCommandKey = CommandKey.RightUp;
+            else if (dPadInput.y == -1) dPadCommandKey = CommandKey.RightDown;
             else dPadCommandKey = CommandKey.Right;
         }
-        else if (performedValue.x == -1)
+        else if (dPadInput.x == -1)
         {
-            if (performedValue.y == 1) dPadCommandKey = CommandKey.LeftUp;
-            else if (performedValue.y == -1) dPadCommandKey = CommandKey.LeftDown;
+            if (dPadInput.y == 1) dPadCommandKey = CommandKey.LeftUp;
+            else if (dPadInput.y == -1) dPadCommandKey = CommandKey.LeftDown;
             else dPadCommandKey = CommandKey.Left;
         }
         else
         {
-            if (performedValue.y == 1) dPadCommandKey = CommandKey.Up;
-            else if (performedValue.y == -1) dPadCommandKey = CommandKey.Down;
+            if (dPadInput.y == 1) dPadCommandKey = CommandKey.Up;
+            else if (dPadInput.y == -1) dPadCommandKey = CommandKey.Down;
         }
         OnCommandKeyInput?.Invoke(new CommandInputEntry(dPadCommandKey, Time.time));
     }

@@ -25,6 +25,6 @@ public class CR : MonoBehaviour
     private void Awake()
     {
         movement.Initialize(inputHandler);
-        skillCaster.Initialize(inputHandler);
+        skillCaster.Initialize(inputHandler, movement);
     }
 }
