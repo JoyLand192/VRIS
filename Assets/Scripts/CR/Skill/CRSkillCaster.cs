@@ -43,6 +43,20 @@ public class CRSkillCaster : MonoBehaviour
         inputHandler.OnCommandKeyInput += OnCommandInput;
         SortAvailableCommands();
     }
+    private static List<CommandKey> MirroredSequence(List<CommandKey> sequence) => sequence.Select(MirrorKey).ToList();
+    private static CommandKey MirrorKey(CommandKey key)
+    {
+        return key switch
+        {
+            CommandKey.Left => CommandKey.Right,
+            CommandKey.Right => CommandKey.Left,
+            CommandKey.RightUp => CommandKey.LeftUp,
+            CommandKey.RightDown => CommandKey.LeftDown,
+            CommandKey.LeftUp => CommandKey.RightUp,
+            CommandKey.LeftDown => CommandKey.RightDown,
+            _ => key,
+        };
+    }
     public void OnCommandInput(CommandInputEntry inputEntry)
     {
         Debug.Log($"{(int)inputEntry.CommandKey} | {inputEntry.InputTime}");
@@ -59,9 +73,13 @@ public class CRSkillCaster : MonoBehaviour
             break;
         }
     }
-    private bool CheckCommandInput(CommandData commandData)
+    private bool CheckCommandInput(CommandData command)
     {
-        var sequence = commandData.Sequence;
+        return CheckCommandInputWithSequence(command.Sequence, command) 
+            || CheckCommandInputWithSequence(MirroredSequence(command.Sequence), command);
+    }
+    private bool CheckCommandInputWithSequence(List<CommandKey> sequence, CommandData commandData)
+    {
         if (sequence.Count > inputBuffer.Count) return false;
 
         int progress = 1;
