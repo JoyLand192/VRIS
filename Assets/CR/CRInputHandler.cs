@@ -9,7 +9,7 @@ public enum CommandKey
     Up = 8, Left = 4, Down = 2, Right = 6,
     LeftUp = 7, LeftDown = 1,
     RightUp = 9, RightDown = 3,
-    Punch = 100, Kick, Slash, Special
+    Punch = 100, Slash, Special,
 }
 public readonly struct CommandInputEntry
 {
@@ -38,6 +38,7 @@ public class CRInputHandler : MonoBehaviour
     public System.Action<Vector2> OnDPadInput;
     public System.Action<float> OnHorizontalInput;
     public System.Action<float> OnSprintInput;
+    public System.Action<bool> OnSneakInput;
     public System.Action OnJumpInput;
     public System.Action OnDashInput;
     private void OnEnable()
@@ -65,6 +66,8 @@ public class CRInputHandler : MonoBehaviour
         crMovement.AttackKey.performed += AttackKeyHandler;
 
         crMovement.Jump.performed += JumpKeyHandler;
+        crMovement.Sneak.performed += SneakKeyHandler;
+        crMovement.Sneak.canceled += SneakKeyHandler;
         crMovement.Dash.performed += DashKeyHandler;
     }
     private void InputDispose()
@@ -76,6 +79,8 @@ public class CRInputHandler : MonoBehaviour
         crMovement.AttackKey.performed -= AttackKeyHandler;
 
         crMovement.Jump.performed -= JumpKeyHandler;
+        crMovement.Sneak.performed -= SneakKeyHandler;
+        crMovement.Sneak.canceled -= SneakKeyHandler;
         crMovement.Dash.performed -= DashKeyHandler;
     }
     private void DPadHandler(InputAction.CallbackContext context)
@@ -110,6 +115,12 @@ public class CRInputHandler : MonoBehaviour
         var rawValue = (int)performedValue - 1 + (int)CommandKey.Punch;
 
         OnCommandKeyInput?.Invoke(new CommandInputEntry(rawValue, Time.time));
+    }
+    private void SneakKeyHandler(InputAction.CallbackContext context)
+    {
+        var performedValue = context.ReadValue<float>();
+        var isSneaking = performedValue > 0;
+        OnSneakInput?.Invoke(isSneaking);
     }
     private void JumpKeyHandler(InputAction.CallbackContext context) => OnJumpInput?.Invoke();
     private void DashKeyHandler(InputAction.CallbackContext context) => OnDashInput?.Invoke();

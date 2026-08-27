@@ -12,6 +12,7 @@ public enum CommandInputRequirement
     Forward = 1 << 0,
     Down = 1 << 1,
     Airborne = 1 << 2,
+    Grounded = 1 << 3,
 }
 public class CRSkillCaster : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class CRSkillCaster : MonoBehaviour
     [SerializeField] private List<CommandData> availableCommands = new();
     private CRInputHandler inputHandler;
     private CRMovement movement;
+    private CRAnimator animator;
     private void Update()
     {
         var currentTime = Time.time;
@@ -35,10 +37,11 @@ public class CRSkillCaster : MonoBehaviour
     {
         availableCommands = availableCommands.OrderByDescending(c => c.Priority).ToList();
     }
-    public void Initialize(CRInputHandler inputHandler, CRMovement movement)
+    public void Initialize(CRInputHandler inputHandler, CRMovement movement, CRAnimator animator)
     {
         this.inputHandler = inputHandler;
         this.movement = movement;
+        this.animator = animator;
 
         inputHandler.OnCommandKeyInput += OnCommandInput;
         SortAvailableCommands();
@@ -119,6 +122,10 @@ public class CRSkillCaster : MonoBehaviour
         if (requirement.HasFlag(CommandInputRequirement.Airborne))
         {
             if (movement.CurrentContact == CRMovement.SurfaceContact.GROUNDED) return false;
+        }
+        if (requirement.HasFlag(CommandInputRequirement.Grounded))
+        {
+            if (movement.CurrentContact != CRMovement.SurfaceContact.GROUNDED) return false;
         }
         return true;
     }

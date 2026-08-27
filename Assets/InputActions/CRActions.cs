@@ -145,6 +145,15 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sneak"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f6470a7-6cc1-4112-8fb5-df333135bc6c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -312,6 +321,17 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
                     ""action"": ""AttackKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""173b06e8-59a3-41af-ab3f-3461bc1d257f"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Sneak"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -338,6 +358,7 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
         m_CRMovement_Jump = m_CRMovement.FindAction("Jump", throwIfNotFound: true);
         m_CRMovement_Move = m_CRMovement.FindAction("Move", throwIfNotFound: true);
         m_CRMovement_AttackKey = m_CRMovement.FindAction("AttackKey", throwIfNotFound: true);
+        m_CRMovement_Sneak = m_CRMovement.FindAction("Sneak", throwIfNotFound: true);
     }
 
     ~@CRActions()
@@ -424,6 +445,7 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_CRMovement_Jump;
     private readonly InputAction m_CRMovement_Move;
     private readonly InputAction m_CRMovement_AttackKey;
+    private readonly InputAction m_CRMovement_Sneak;
     /// <summary>
     /// Provides access to input actions defined in input action map "CRMovement".
     /// </summary>
@@ -459,6 +481,10 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "CRMovement/AttackKey".
         /// </summary>
         public InputAction @AttackKey => m_Wrapper.m_CRMovement_AttackKey;
+        /// <summary>
+        /// Provides access to the underlying input action "CRMovement/Sneak".
+        /// </summary>
+        public InputAction @Sneak => m_Wrapper.m_CRMovement_Sneak;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -503,6 +529,9 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
             @AttackKey.started += instance.OnAttackKey;
             @AttackKey.performed += instance.OnAttackKey;
             @AttackKey.canceled += instance.OnAttackKey;
+            @Sneak.started += instance.OnSneak;
+            @Sneak.performed += instance.OnSneak;
+            @Sneak.canceled += instance.OnSneak;
         }
 
         /// <summary>
@@ -532,6 +561,9 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
             @AttackKey.started -= instance.OnAttackKey;
             @AttackKey.performed -= instance.OnAttackKey;
             @AttackKey.canceled -= instance.OnAttackKey;
+            @Sneak.started -= instance.OnSneak;
+            @Sneak.performed -= instance.OnSneak;
+            @Sneak.canceled -= instance.OnSneak;
         }
 
         /// <summary>
@@ -627,5 +659,12 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttackKey(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Sneak" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSneak(InputAction.CallbackContext context);
     }
 }

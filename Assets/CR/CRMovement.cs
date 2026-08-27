@@ -13,9 +13,10 @@ public class CRMovement : MonoBehaviour
     private const float tempCRJumpPower = 35.5f;
 
     private const float moveXInertiaReduction = 45f;
-    private const float jumpDashInterval = 0.05f;
-    private const float jumpDashVelocityX = 28f;
-    private const float jumpDashVelocityTime = 0.15f;
+    private const float jumpDashInterval = 0.1f;
+    private const float jumpDashVelocityX = 30f;
+    private const float jumpDashVelocityTime = 0.25f;
+    private const float jumpDashInertiaAfterRatio = 0.6f;
     private const float wallSlideVelocityY = 3.5f;
 
     private const float platformRayLength = 0.1f;
@@ -28,11 +29,32 @@ public class CRMovement : MonoBehaviour
     private float moveXInertia = 0f;
     private bool jumpTrigger = false;
     private bool dashTrigger = false;
+    [SerializeField] private bool sneakTrigger = false;
     private bool isSprinting = false;
-    private bool isDashing = false;
     private int availableJumpCount = tempCRJumpCount;
     private Rigidbody2D rb;
     private BoxCollider2D col;
+    private CRAnimator animator;
+    private bool isDashing = false;
+    public bool IsDashing
+    {
+        get => isDashing;
+        private set
+        {
+            isDashing = value;
+            animator.IsDashing = value;
+        }
+    }
+    [SerializeField] private bool isSneaking = false;
+    public bool IsSneaking
+    {
+        get => isSneaking;
+        set
+        {
+            isSneaking = value;
+            animator.IsSneaking = value;
+        }
+    }
     private bool isMovable = true;
     public bool IsMovable
     {
@@ -42,7 +64,16 @@ public class CRMovement : MonoBehaviour
             isMovable = value;
         }
     }
-    [field: SerializeField] public SurfaceContact CurrentContact { get; private set; }
+    [SerializeField] private SurfaceContact currentContact = SurfaceContact.AIRBORNE;
+    public SurfaceContact CurrentContact
+    {
+        get => currentContact;
+        private set
+        {
+            currentContact = value;
+            animator.IsGrounded = value == SurfaceContact.GROUNDED;
+        }
+    }
     public enum SurfaceContact
     {
         AIRBORNE,
@@ -54,27 +85,37 @@ public class CRMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
     }
-    public void Initialize(CRInputHandler inputHandler)
+    public void Initialize(CRInputHandler inputHandler, CRAnimator animator)
     {
+        this.animator = animator;
+
         inputHandler.OnHorizontalInput += OnHorizontalInput;
         inputHandler.OnJumpInput += OnJumpInput;
+        inputHandler.OnSneakInput += OnSneakInput;
         inputHandler.OnDashInput += OnDashInput;
         inputHandler.OnSprintInput += OnSprintInput;
     }
     //   KeyInputHandler   ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ|
     private void OnHorizontalInput(float value)
     {
-        if (isDashing) return;
-        if (value != 0) moveRatioFixed = value;
-
+        if (IsDashing) return;
+        if (value != 0)
+        {
+            moveRatioFixed = value;
+            animator.PlayerDirection = (int)Mathf.Sign(value);
+        }
         if (moveXInertia > 0) return;
 
         moveRatio = value;
     }
     private void OnSprintInput(float value)
     {
-        if (isDashing) return;
+        if (IsDashing) return;
         isSprinting = value > 0;
+    }
+    private void OnSneakInput(bool value)
+    {
+        sneakTrigger = value;
     }
     private void OnJumpInput() => jumpTrigger = true;
     private void OnDashInput() => dashTrigger = true;
@@ -82,9 +123,11 @@ public class CRMovement : MonoBehaviour
     private void FixedUpdate()
     {
         moveXInertia = Mathf.Max(0, moveXInertia - moveXInertiaReduction * Time.fixedDeltaTime);
+        animator.VelocityY = rb.velocity.y;
 
         Move();
         PlatformRaycast();
+        Sneak();
         Jump();
         Dash();
     }
@@ -115,10 +158,25 @@ public class CRMovement : MonoBehaviour
         }
         CurrentContact = SurfaceContact.AIRBORNE;
     }
+    private void Sneak()
+    {
+        if (!sneakTrigger)
+        {
+            IsSneaking = false;
+            return;
+        }
+        if (!IsMovable || IsDashing || CurrentContact != SurfaceContact.GROUNDED) return;
+        IsSneaking = true;
+    }
     private void Move()
     {
         if (!IsMovable) return;
-        if (isDashing) return;
+        if (IsDashing) return;
+        if (IsSneaking)
+        {
+            rb.velocity = Vector2.up * rb.velocity.y;
+            return;
+        }
         if (CurrentContact == SurfaceContact.WALLCONTACT && IsHoldingWall()) WallSlide();
 
         var sprintRatio = isSprinting ? tempCRSprintMultiplier : 1;
@@ -136,7 +194,9 @@ public class CRMovement : MonoBehaviour
         if (!jumpTrigger) return;
         jumpTrigger = false;
 
-        if (!IsMovable | isDashing) return;
+        if (!IsMovable || IsDashing) return;
+        IsSneaking = false; // 점프 시 웅크리기 해제
+
         if (CurrentContact == SurfaceContact.WALLCONTACT)
         {
             WallJump();
@@ -151,7 +211,7 @@ public class CRMovement : MonoBehaviour
     }
     private void WallJump()
     {
-        if (isDashing) return;
+        if (IsDashing) return;
 
         moveRatio = -wallDirection;
 
@@ -171,21 +231,23 @@ public class CRMovement : MonoBehaviour
     }
     private async UniTask JumpDash()
     {
-        if (isDashing) return;
+        if (IsDashing) return;
 
         availableJumpCount--;
 
         var direction = moveRatioFixed;
-        var speedAfter = jumpDashVelocityX - tempCRMoveSpeed;
+        var speedAfter = (jumpDashVelocityX - tempCRMoveSpeed) * jumpDashInertiaAfterRatio;
         var gravityPrev = rb.gravityScale;
 
         rb.gravityScale = 0;
-        isDashing = true;
+        IsDashing = true;
+        animator.DashState = 1;
         rb.velocity = Vector2.zero;
 
         await UniTask.Delay(TimeSpan.FromSeconds(jumpDashInterval));
 
         rb.velocity = Vector2.right * (direction * jumpDashVelocityX);
+        animator.DashState = 2;
 
         await UniTask.Delay(TimeSpan.FromSeconds(jumpDashVelocityTime));
 
@@ -193,7 +255,8 @@ public class CRMovement : MonoBehaviour
         moveRatio = direction;
         rb.gravityScale = gravityPrev;
 
-        isDashing = false;
+        IsDashing = false;
+        animator.DashState = 0;
         isSprinting = false;
     }
 }

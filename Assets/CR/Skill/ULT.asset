@@ -15,5 +15,5 @@ MonoBehaviour:
   commandName: 236236P
   commandInputBufferTime: 0.7
   priority: 15
-  inputRequirement: 0
+  inputRequirement: 8
   sequence: 02000000030000000600000002000000030000000600000064000000
