@@ -6,11 +6,13 @@ public class CRAnimator : MonoBehaviour
 {
     [SerializeField] private Transform graphic;
     [SerializeField] private Animator rootAnimator;
-    private static readonly int isSneakingHash = Animator.StringToHash(nameof(IsSneaking));
-    private static readonly int isGroundedHash = Animator.StringToHash(nameof(IsGrounded));
+    private static readonly int dashStateHash = Animator.StringToHash(nameof(DashState));
     private static readonly int isDashingHash = Animator.StringToHash(nameof(IsDashing));
     private static readonly int velocityYHash = Animator.StringToHash(nameof(VelocityY));
-    private static readonly int dashStateHash = Animator.StringToHash(nameof(DashState));
+    private static readonly int isSneakingHash = Animator.StringToHash(nameof(IsSneaking));
+    private static readonly int isGroundedHash = Animator.StringToHash(nameof(IsGrounded));
+    public event System.Action OnCancelWindowOpen;
+    public event System.Action OnSkillEnd;
     private int playerDirection;
     public int PlayerDirection
     {
@@ -26,6 +28,21 @@ public class CRAnimator : MonoBehaviour
             graphic.localScale = localScale;
         }
     }
+    public int DashState
+    {
+        get => rootAnimator.GetInteger(dashStateHash);
+        set => rootAnimator.SetInteger(dashStateHash, value);
+    }
+    public float VelocityY
+    {
+        get => rootAnimator.GetFloat(velocityYHash);
+        set => rootAnimator.SetFloat(velocityYHash, value);
+    }
+    public bool IsDashing
+    {
+        get => rootAnimator.GetBool(isDashingHash);
+        set => rootAnimator.SetBool(isDashingHash, value);
+    }
     public bool IsSneaking
     {
         get => rootAnimator.GetBool(isSneakingHash);
@@ -36,19 +53,7 @@ public class CRAnimator : MonoBehaviour
         get => rootAnimator.GetBool(isGroundedHash);
         set => rootAnimator.SetBool(isGroundedHash, value);
     }
-    public bool IsDashing
-    {
-        get => rootAnimator.GetBool(isDashingHash);
-        set => rootAnimator.SetBool(isDashingHash, value);
-    }
-    public float VelocityY
-    {
-        get => rootAnimator.GetFloat(velocityYHash);
-        set => rootAnimator.SetFloat(velocityYHash, value);
-    }
-    public int DashState
-    {
-        get => rootAnimator.GetInteger(dashStateHash);
-        set => rootAnimator.SetInteger(dashStateHash, value);
-    }
+    public void PlayState(string stateName) => rootAnimator.Play(stateName);
+    public void OpenCancelWindow() => OnCancelWindowOpen?.Invoke();
+    public void SkillEnd() => OnSkillEnd?.Invoke();
 }

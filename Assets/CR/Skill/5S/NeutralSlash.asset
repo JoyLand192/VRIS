@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ae9ffe4386c7445a2ad4d02ed37da8, type: 3}
-  m_Name: ULT
+  m_Script: {fileID: 11500000, guid: 13308b23a87ebea44b15fdecefb1457c, type: 3}
+  m_Name: NeutralSlash
   m_EditorClassIdentifier: 
-  commandName: 236236P
-  commandInputBufferTime: 0.7
-  priority: 15
-  inputRequirement: 8
-  sequence: 02000000030000000600000002000000030000000600000064000000
+  <SkillName>k__BackingField: 

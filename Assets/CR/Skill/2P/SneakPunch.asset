@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ae9ffe4386c7445a2ad4d02ed37da8, type: 3}
-  m_Name: 22K
+  m_Script: {fileID: 11500000, guid: 7944ccfbc21719c48837caf0f418768a, type: 3}
+  m_Name: SneakPunch
   m_EditorClassIdentifier: 
-  commandName: 22K
-  commandInputBufferTime: 0.5
-  priority: 5
-  inputRequirement: 8
-  sequence: 020000000200000065000000
+  <SkillName>k__BackingField: 2P

@@ -28,5 +28,7 @@ public class CR : MonoBehaviour
     {
         movement.Initialize(inputHandler, animator);
         skillCaster.Initialize(inputHandler, movement, animator);
+        skillCaster.OnSkillExecute += SkillExecuteHandler;
     }
+    private void SkillExecuteHandler(Skill skill) => skill.Execute(this);
 }

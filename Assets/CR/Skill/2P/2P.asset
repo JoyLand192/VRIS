@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ae9ffe4386c7445a2ad4d02ed37da8, type: 3}
   m_Name: 2P
   m_EditorClassIdentifier: 
-  commandName: 2P
-  commandInputBufferTime: 0.5
-  priority: 3
-  inputRequirement: 10
-  sequence: 64000000
+  <CommandName>k__BackingField: 2P
+  <CommandInputBufferTime>k__BackingField: 0.5
+  <Priority>k__BackingField: 3
+  <InputRequirement>k__BackingField: 2
+  <Sequence>k__BackingField: 64000000
+  <FollowUpCommands>k__BackingField: []
+  <Skill>k__BackingField: {fileID: 11400000, guid: 72aa930d1ec7a8842b8334d56df56892, type: 2}

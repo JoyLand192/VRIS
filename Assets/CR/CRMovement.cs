@@ -14,9 +14,9 @@ public class CRMovement : MonoBehaviour
 
     private const float moveXInertiaReduction = 45f;
     private const float jumpDashInterval = 0.1f;
-    private const float jumpDashVelocityX = 30f;
-    private const float jumpDashVelocityTime = 0.25f;
-    private const float jumpDashInertiaAfterRatio = 0.6f;
+    private const float jumpDashVelocityX = 40f;
+    private const float jumpDashVelocityTime = 0.15f;
+    private const float jumpDashInertiaAfterRatio = 0.4f;
     private const float wallSlideVelocityY = 3.5f;
 
     private const float platformRayLength = 0.1f;
@@ -55,13 +55,18 @@ public class CRMovement : MonoBehaviour
             animator.IsSneaking = value;
         }
     }
-    private bool isMovable = true;
+    [SerializeField] private bool isMovable = true;
     public bool IsMovable
     {
         get => isMovable;
         set
         {
             isMovable = value;
+            if (!value)
+            {
+                moveRatio = 0;
+                rb.velocity = Vector2.up * rb.velocity.y;
+            }
         }
     }
     [SerializeField] private SurfaceContact currentContact = SurfaceContact.AIRBORNE;
@@ -102,7 +107,7 @@ public class CRMovement : MonoBehaviour
         if (value != 0)
         {
             moveRatioFixed = value;
-            animator.PlayerDirection = (int)Mathf.Sign(value);
+            if (IsMovable) animator.PlayerDirection = (int)Mathf.Sign(value);
         }
         if (moveXInertia > 0) return;
 

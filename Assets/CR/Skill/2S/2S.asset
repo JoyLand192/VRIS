@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ae9ffe4386c7445a2ad4d02ed37da8, type: 3}
-  m_Name: 5P
+  m_Name: 2S
   m_EditorClassIdentifier: 
-  commandName: 5P
-  commandInputBufferTime: 0.5
-  priority: 1
-  inputRequirement: 8
-  sequence: 64000000
+  <CommandName>k__BackingField: 2S
+  <CommandInputBufferTime>k__BackingField: 0.5
+  <Priority>k__BackingField: 3
+  <InputRequirement>k__BackingField: 2
+  <Sequence>k__BackingField: 65000000
+  <FollowUpCommands>k__BackingField: []
+  <Skill>k__BackingField: {fileID: 11400000, guid: 825b5eb15287e0744b912e697ee71848, type: 2}
