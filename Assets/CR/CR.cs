@@ -16,19 +16,17 @@ using UnityEngine;
 
 public class CR : MonoBehaviour
 {
-    [SerializeField] private CRMovement movement;
-    [SerializeField] private CRInputHandler inputHandler;
-    [SerializeField] private CRSkillCaster skillCaster;
-    [SerializeField] private CRAnimator animator;
-    public CRMovement Movement => movement;
-    public CRInputHandler InputHandler => inputHandler;
-    public CRSkillCaster SkillCaster => skillCaster;
-    public CRAnimator Animator => animator;
+    [field: SerializeField] public CRMovement Movement { get; private set; }
+    [field: SerializeField] public CRInputHandler InputHandler { get; private set; }
+    [field: SerializeField] public CRSkillCaster SkillCaster { get; private set; }
+    [field: SerializeField] public CRAnimator Animator { get; private set; }
+    [field: SerializeField] public CRVFX VFX { get; private set; }
+
     private void Awake()
     {
-        movement.Initialize(inputHandler, animator);
-        skillCaster.Initialize(inputHandler, movement, animator);
-        skillCaster.OnSkillExecute += SkillExecuteHandler;
+        Movement.Initialize(InputHandler, Animator);
+        SkillCaster.Initialize(InputHandler, Movement, Animator);
+        SkillCaster.OnSkillExecute += SkillExecuteHandler;
     }
     private void SkillExecuteHandler(Skill skill) => skill.Execute(this);
 }

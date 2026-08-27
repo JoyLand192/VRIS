@@ -185,8 +185,8 @@ public class CRMovement : MonoBehaviour
         if (CurrentContact == SurfaceContact.WALLCONTACT && IsHoldingWall()) WallSlide();
 
         var sprintRatio = isSprinting ? tempCRSprintMultiplier : 1;
-        var fixedMoveRatio = moveRatio * (tempCRMoveSpeed * sprintRatio + moveXInertia);
-        rb.velocity = new Vector2(fixedMoveRatio, rb.velocity.y);
+        var finalMoveRatio = moveRatio * (tempCRMoveSpeed * sprintRatio + moveXInertia);
+        rb.velocity = new Vector2(finalMoveRatio, rb.velocity.y);
     }
     private bool IsHoldingWall() => moveRatioFixed != 0 && Mathf.Sign(moveRatioFixed) == wallDirection;
     private void WallSlide()
@@ -247,7 +247,7 @@ public class CRMovement : MonoBehaviour
         rb.gravityScale = 0;
         IsDashing = true;
         animator.DashState = 1;
-        rb.velocity = Vector2.zero;
+        rb.velocity *= 0.2f;
 
         await UniTask.Delay(TimeSpan.FromSeconds(jumpDashInterval));
 
