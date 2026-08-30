@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe82c54a20bfb4478bafdc52f44c37b, type: 3}
-  m_Name: NeutralPunch
+  m_Script: {fileID: 11500000, guid: 296a8b72e5369f441be0a73524a68c4e, type: 3}
+  m_Name: JumpSlash
   m_EditorClassIdentifier: 
-  <SkillName>k__BackingField: 5P
-  <MovementBlock>k__BackingField: 1
+  <SkillName>k__BackingField: j.S
+  <MovementBlock>k__BackingField: 0

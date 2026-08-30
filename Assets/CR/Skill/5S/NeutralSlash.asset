@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NeutralSlash
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: 
+  <MovementBlock>k__BackingField: 1

@@ -15,7 +15,7 @@ MonoBehaviour:
   <CommandName>k__BackingField: 5S
   <CommandInputBufferTime>k__BackingField: 0.5
   <Priority>k__BackingField: 1
-  <InputRequirement>k__BackingField: 0
+  <InputRequirement>k__BackingField: 8
   <Sequence>k__BackingField: 65000000
   <FollowUpCommands>k__BackingField:
   - {fileID: 11400000, guid: 31a170833c8db074fb55129d6443494d, type: 2}

@@ -7,6 +7,12 @@ using UnityEngine.InputSystem;
 
 public class CRMovement : MonoBehaviour
 {
+    public enum SurfaceContact
+    {
+        AIRBORNE,
+        GROUNDED,
+        WALLCONTACT,
+    }
     private const int tempCRJumpCount = 2;
     private const float tempCRMoveSpeed = 7f;
     private const float tempCRSprintMultiplier = 2.5f;
@@ -29,12 +35,14 @@ public class CRMovement : MonoBehaviour
     private float moveXInertia = 0f;
     private bool jumpTrigger = false;
     private bool dashTrigger = false;
-    [SerializeField] private bool sneakTrigger = false;
+    private bool sneakTrigger = false;
     private bool isSprinting = false;
     private int availableJumpCount = tempCRJumpCount;
+    private int moveBlockerCount = 0;
     private Rigidbody2D rb;
     private BoxCollider2D col;
     private CRAnimator animator;
+    public bool IsMovable => moveBlockerCount <= 0;
     private bool isDashing = false;
     public bool IsDashing
     {
@@ -55,20 +63,6 @@ public class CRMovement : MonoBehaviour
             animator.IsSneaking = value;
         }
     }
-    [SerializeField] private bool isMovable = true;
-    public bool IsMovable
-    {
-        get => isMovable;
-        set
-        {
-            isMovable = value;
-            if (!value)
-            {
-                moveRatio = 0;
-                rb.velocity = Vector2.up * rb.velocity.y;
-            }
-        }
-    }
     [SerializeField] private SurfaceContact currentContact = SurfaceContact.AIRBORNE;
     public SurfaceContact CurrentContact
     {
@@ -79,12 +73,7 @@ public class CRMovement : MonoBehaviour
             animator.IsGrounded = value == SurfaceContact.GROUNDED;
         }
     }
-    public enum SurfaceContact
-    {
-        AIRBORNE,
-        GROUNDED,
-        WALLCONTACT,
-    }
+    public event Action OnLanded;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -99,6 +88,17 @@ public class CRMovement : MonoBehaviour
         inputHandler.OnSneakInput += OnSneakInput;
         inputHandler.OnDashInput += OnDashInput;
         inputHandler.OnSprintInput += OnSprintInput;
+    }
+    public void AddMoveBlocker(int amount)
+    {
+        var lockedIn = moveBlockerCount == 0 && moveBlockerCount + amount > 0;
+        moveBlockerCount = Mathf.Max(0, moveBlockerCount + amount);
+
+        if (lockedIn)
+        {
+            moveRatio = 0;
+            rb.velocity = Vector2.up * rb.velocity.y;
+        }
     }
     //   KeyInputHandler   ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ|
     private void OnHorizontalInput(float value)
@@ -145,6 +145,8 @@ public class CRMovement : MonoBehaviour
 
         if (platformHit && rb.velocity.y <= groundedVelocityThreshold)
         {
+            if (CurrentContact != SurfaceContact.GROUNDED) OnLanded?.Invoke();
+
             CurrentContact = SurfaceContact.GROUNDED;
             availableJumpCount = tempCRJumpCount;
             moveXInertia = 0;

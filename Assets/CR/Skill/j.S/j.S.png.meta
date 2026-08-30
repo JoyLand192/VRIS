@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01db0d337ecfa31428ec29af520b34f1
+guid: c1291274254e0e04189b54950b55c230
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,8 +46,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -110,148 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2S_0
+      name: j.S_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a911b2ee7dea5a4e82ecedb5e08e37e
-      internalID: -544929280
+      spriteID: 2e7e917a6284ec84baa35cfd834218b1
+      internalID: -2028026909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2S_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff1da87da3e4c844eabcbfb666d9cf84
-      internalID: 1739598137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 2S_2
+      name: j.S_1
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc90e4c8da9d6ec4995fed30da212f09
-      internalID: -1117640156
+      spriteID: 3516ec3d12bb77f4fbb187e106707b54
+      internalID: 986259865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2S_3
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac9fffb50b7a06b4387f3ca60f376d68
-      internalID: 2046252357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 2S_4
+      name: j.S_2
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f922bd77fd17c44abc9204c7d8eea41
-      internalID: 2102255367
+      spriteID: b0a8d645dbc15494480e759270709f30
+      internalID: -1498324359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2S_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d12ac2b9654aeeb4d921af4d74a1cc56
-      internalID: 1961022113
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 2S_6
+      name: j.S_3
       rect:
         serializedVersion: 2
         x: 768
         y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab7ff1f207fd0b46b7e082de68d86c1
-      internalID: -1251929556
+      spriteID: 92181ce09b7b53043b4e6fd07069cc43
+      internalID: 309667814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: j.S_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c96d0b7675e549649a2bbe8f5f7e81a6
+      internalID: 1090530495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: j.S_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa13daaf2237fb14581b139180abb59e
+      internalID: 978906815
       vertices: []
       indices: 
       edges: []
@@ -267,13 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      2S_0: -544929280
-      2S_1: 1739598137
-      2S_2: -1117640156
-      2S_3: 2046252357
-      2S_4: 2102255367
-      2S_5: 1961022113
-      2S_6: -1251929556
+      j.S_0: -2028026909
+      j.S_1: 986259865
+      j.S_2: -1498324359
+      j.S_3: 309667814
+      j.S_4: 1090530495
+      j.S_5: 978906815
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

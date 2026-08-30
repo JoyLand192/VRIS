@@ -30,7 +30,18 @@ public class CRSkillCaster : MonoBehaviour
         set
         {
             isSkillCasting = value;
-            movement.IsMovable = !value;
+        }
+    }
+    [SerializeField] private bool isMovementBlocked;
+    public bool IsMovementBlocked
+    {
+        get => isMovementBlocked;
+        set
+        {
+            if (value == isMovementBlocked) return;
+
+            isMovementBlocked = value;
+            movement.AddMoveBlocker(value ? 1 : -1);
         }
     }
     public System.Action<Skill> OnSkillExecute;
@@ -68,6 +79,7 @@ public class CRSkillCaster : MonoBehaviour
         this.movement = movement;
         this.animator = animator;
 
+        movement.OnLanded += OnLandedHandler;
         inputHandler.OnCommandKeyInput += OnCommandInput;
         animator.OnCancelWindowOpen += OnCancelWindowOpenHandler;
         animator.OnSkillEnd += EndSkill;
@@ -110,13 +122,22 @@ public class CRSkillCaster : MonoBehaviour
 
         Debug.Assert(commandEntry.Skill != null, $"bro didn't made skill for command {commandEntry.CommandName}");
         IsSkillCasting = true;
+        if (commandEntry.Skill.MovementBlock) IsMovementBlocked = true;
         OnSkillExecute?.Invoke(commandEntry.Skill);
 
         inputBuffer.Clear();
     }
     private void OnCancelWindowOpenHandler() => isCancelable = true;
+    private void OnLandedHandler()
+    {
+        if (currentCommand == null) return;
+        EndSkill();
+    }
     private void EndSkill()
     {
+        if (currentCommand.Skill.MovementBlock) IsMovementBlocked = false;
+
+        animator.StopSkill();
         currentCommand = null;
         isCancelable = false;
         IsSkillCasting = false;

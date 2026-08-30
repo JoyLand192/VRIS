@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SneakPunch
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: 2P
+  <MovementBlock>k__BackingField: 1

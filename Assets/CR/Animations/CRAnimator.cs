@@ -54,6 +54,7 @@ public class CRAnimator : MonoBehaviour
         set => rootAnimator.SetBool(isGroundedHash, value);
     }
     public void PlayState(string stateName) => rootAnimator.Play(stateName);
+    public void StopSkill() => rootAnimator.Play("Neutral", 0);
     public void OpenCancelWindow() => OnCancelWindowOpen?.Invoke();
     public void SkillEnd() => OnSkillEnd?.Invoke();
 }

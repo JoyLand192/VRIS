@@ -14,7 +14,7 @@ TagManager:
   - SoftPlatform
   - HardPlatform
   - Wall
-  - 
+  - CRHitbox
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: CR
     uniqueID: 890704631
+    locked: 0
+  - name: Hitboxes
+    uniqueID: 201729267
     locked: 0
