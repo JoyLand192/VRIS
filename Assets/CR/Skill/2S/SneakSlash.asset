@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: 
   <MovementBlock>k__BackingField: 1
+  <DashBlock>k__BackingField: 1

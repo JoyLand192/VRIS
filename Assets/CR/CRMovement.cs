@@ -38,11 +38,13 @@ public class CRMovement : MonoBehaviour
     private bool sneakTrigger = false;
     private bool isSprinting = false;
     private int availableJumpCount = tempCRJumpCount;
-    private int moveBlockerCount = 0;
     private Rigidbody2D rb;
     private BoxCollider2D col;
     private CRAnimator animator;
+    private int moveBlockerCount = 0;
     public bool IsMovable => moveBlockerCount <= 0;
+    private int dashBlockerCount = 0;
+    public bool IsDashable => dashBlockerCount <= 0;
     private bool isDashing = false;
     public bool IsDashing
     {
@@ -100,6 +102,7 @@ public class CRMovement : MonoBehaviour
             rb.velocity = Vector2.up * rb.velocity.y;
         }
     }
+    public void AddDashBlocker(int amount) => dashBlockerCount = Mathf.Max(0, dashBlockerCount + amount);
     //   KeyInputHandler   ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ|
     private void OnHorizontalInput(float value)
     {
@@ -116,6 +119,7 @@ public class CRMovement : MonoBehaviour
     private void OnSprintInput(float value)
     {
         if (IsDashing) return;
+
         isSprinting = value > 0;
     }
     private void OnSneakInput(bool value)
@@ -232,6 +236,7 @@ public class CRMovement : MonoBehaviour
         if (!dashTrigger) return;
         dashTrigger = false;
 
+        if (!IsDashable) return;
         if (CurrentContact != SurfaceContact.AIRBORNE) return;
         if (availableJumpCount < 1) return;
         JumpDash().Forget();

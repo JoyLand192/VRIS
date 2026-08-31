@@ -13,7 +13,11 @@ namespace VRIS.Skills.TheNew
         {
             cr.Animator.PlayState(animationStateName);
 
-            return UniTask.CompletedTask;   
+            return UniTask.CompletedTask;
+        }
+        protected override DamageInfo CalculateDamage(CR cr)
+        {
+            return new DamageInfo(cr, 10);
         }
     }
 }

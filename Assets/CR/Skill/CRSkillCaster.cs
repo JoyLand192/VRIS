@@ -15,13 +15,11 @@ public enum CommandInputRequirement
 public class CRSkillCaster : MonoBehaviour
 {
     private const float commandInputBufferTime = 0.5f;
+    private CR cr;
     [SerializeField] private TextMeshProUGUI TEXT;
     [SerializeField] private List<CommandInputEntry> inputBuffer = new();
     [SerializeField] private List<CommandData> availableCommands = new();
     [SerializeField] private CommandData currentCommand;
-    private CRInputHandler inputHandler;
-    private CRMovement movement;
-    private CRAnimator animator;
     [SerializeField] private bool isCancelable;
     [SerializeField] private bool isSkillCasting;
     public bool IsSkillCasting
@@ -41,10 +39,25 @@ public class CRSkillCaster : MonoBehaviour
             if (value == isMovementBlocked) return;
 
             isMovementBlocked = value;
-            movement.AddMoveBlocker(value ? 1 : -1);
+            cr.Movement.AddMoveBlocker(value ? 1 : -1);
+        }
+    }
+    [SerializeField] private bool isDashBlocked;
+    public bool IsDashBlocked
+    {
+        get => isDashBlocked;
+        set
+        {
+            if (value == isDashBlocked) return;
+
+            isDashBlocked = value;
+            cr.Movement.AddDashBlocker(value ? 1 : -1);
+
+            Debug.Log($"Blocking Dash");
         }
     }
     public System.Action<Skill> OnSkillExecute;
+    public System.Action OnSkillEnd;
     private void Update()
     {
         var currentTime = Time.time;
@@ -73,22 +86,20 @@ public class CRSkillCaster : MonoBehaviour
     {
         availableCommands = availableCommands.OrderByDescending(c => c.Priority).ToList();
     }
-    public void Initialize(CRInputHandler inputHandler, CRMovement movement, CRAnimator animator)
+    public void Initialize(CR cr)
     {
-        this.inputHandler = inputHandler;
-        this.movement = movement;
-        this.animator = animator;
+        this.cr = cr;
 
-        movement.OnLanded += OnLandedHandler;
-        inputHandler.OnCommandKeyInput += OnCommandInput;
-        animator.OnCancelWindowOpen += OnCancelWindowOpenHandler;
-        animator.OnSkillEnd += EndSkill;
+        cr.Movement.OnLanded += OnLandedHandler;
+        cr.InputHandler.OnCommandKeyInput += OnCommandInput;
+        cr.Animator.OnCancelWindowOpen += OnCancelWindowOpenHandler;
+        cr.Animator.OnSkillEnd += EndSkill;
 
         SortAvailableCommands();
     }
     public void OnCommandInput(CommandInputEntry inputEntry)
     {
-        Debug.Log($"{(int)inputEntry.CommandKey} | {inputEntry.InputTime}");
+        //Debug.Log($"{(int)inputEntry.CommandKey} | {inputEntry.InputTime}");
         inputBuffer.Add(inputEntry);
 
         if (currentCommand != null && isCancelable)
@@ -116,13 +127,19 @@ public class CRSkillCaster : MonoBehaviour
     }
     private void CastSkill(CommandData commandEntry)
     {
+        if (cr.Movement.IsDashing) return;
+
         TEXT.text = $"{commandEntry.CommandName}";
         currentCommand = commandEntry;
         Debug.Log($"Command {commandEntry.CommandName} executed!");
 
         Debug.Assert(commandEntry.Skill != null, $"bro didn't made skill for command {commandEntry.CommandName}");
+
         IsSkillCasting = true;
+
         if (commandEntry.Skill.MovementBlock) IsMovementBlocked = true;
+        if (commandEntry.Skill.DashBlock) IsDashBlocked = true;
+
         OnSkillExecute?.Invoke(commandEntry.Skill);
 
         inputBuffer.Clear();
@@ -136,11 +153,14 @@ public class CRSkillCaster : MonoBehaviour
     private void EndSkill()
     {
         if (currentCommand.Skill.MovementBlock) IsMovementBlocked = false;
+        if (currentCommand.Skill.DashBlock) IsDashBlocked = false;
 
-        animator.StopSkill();
         currentCommand = null;
         isCancelable = false;
         IsSkillCasting = false;
+
+        cr.Animator.StopSkill();
+        OnSkillEnd?.Invoke();
     }
     private bool CheckCommandInput(CommandData command)
     {
@@ -179,19 +199,19 @@ public class CRSkillCaster : MonoBehaviour
         if (requirement == CommandInputRequirement.None) return true;
         if (requirement.HasFlag(CommandInputRequirement.Forward))
         {
-            if (!inputHandler.IsHoldingLeft && !inputHandler.IsHoldingRight) return false;
+            if (!cr.InputHandler.IsHoldingLeft && !cr.InputHandler.IsHoldingRight) return false;
         }
         if (requirement.HasFlag(CommandInputRequirement.Down))
         {
-            if (!inputHandler.IsHoldingDown) return false;
+            if (!cr.InputHandler.IsHoldingDown) return false;
         }
         if (requirement.HasFlag(CommandInputRequirement.Airborne))
         {
-            if (movement.CurrentContact == CRMovement.SurfaceContact.GROUNDED) return false;
+            if (cr.Movement.CurrentContact == CRMovement.SurfaceContact.GROUNDED) return false;
         }
         if (requirement.HasFlag(CommandInputRequirement.Grounded))
         {
-            if (movement.CurrentContact != CRMovement.SurfaceContact.GROUNDED) return false;
+            if (cr.Movement.CurrentContact != CRMovement.SurfaceContact.GROUNDED) return false;
         }
         return true;
     }

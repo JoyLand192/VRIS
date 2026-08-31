@@ -17,6 +17,5 @@ MonoBehaviour:
   <Priority>k__BackingField: 1
   <InputRequirement>k__BackingField: 8
   <Sequence>k__BackingField: 64000000
-  <FollowUpCommands>k__BackingField:
-  - {fileID: 11400000}
+  <FollowUpCommands>k__BackingField: []
   <Skill>k__BackingField: {fileID: 11400000, guid: 98b934c72cdbe924f90cffed371b8435, type: 2}

@@ -15,5 +15,9 @@ namespace VRIS.Skills.TheNew
 
             return UniTask.CompletedTask;
         }
+        protected override DamageInfo CalculateDamage(CR cr)
+        {
+            return new DamageInfo(cr, 10);
+        }
     }
 }
