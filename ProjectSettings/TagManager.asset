@@ -44,8 +44,17 @@ TagManager:
   - name: Platform
     uniqueID: 345111251
     locked: 0
+  - name: Enemy
+    uniqueID: 1883523471
+    locked: 0
+  - name: VFXBehind
+    uniqueID: 1634201663
+    locked: 0
   - name: CR
     uniqueID: 890704631
+    locked: 0
+  - name: VFX
+    uniqueID: 2882821975
     locked: 0
   - name: Hitboxes
     uniqueID: 201729267

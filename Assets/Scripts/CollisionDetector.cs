@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class CollisionDetector : MonoBehaviour
 {
+    private static readonly bool isVisible = false;
     private Collider2D col;
     private bool isColliderEnabled;
     public bool IsColliderEnabled
@@ -23,6 +24,7 @@ public class CollisionDetector : MonoBehaviour
     private void Awake()
     {
         col = GetComponent<Collider2D>();
+        if (isVisible && TryGetComponent<SpriteRenderer>(out var sprite)) sprite.enabled = true;
     }
     private void OnCollisionEnter2D(Collision2D collision) => OnCollisionEnter?.Invoke(collision);
     private void OnCollisionExit2D(Collision2D collision) => OnCollisionExit?.Invoke(collision);
