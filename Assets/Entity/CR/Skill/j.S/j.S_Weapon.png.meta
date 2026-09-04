@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c1291274254e0e04189b54950b55c230
+guid: 64282eb3b61aa00499047b6e6fb54c23
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: j.S_0
+      name: j.S_Weapon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,20 +118,20 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e7e917a6284ec84baa35cfd834218b1
-      internalID: -2028026909
+      spriteID: e04bdfd4dba04d74fa7ddc865125b294
+      internalID: 235485493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: j.S_1
+      name: j.S_Weapon_1
       rect:
         serializedVersion: 2
         x: 256
@@ -139,20 +139,20 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3516ec3d12bb77f4fbb187e106707b54
-      internalID: 986259865
+      spriteID: 1d2bd12ec83f6ea4ab5b34959f8a9996
+      internalID: 1691734850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: j.S_2
+      name: j.S_Weapon_2
       rect:
         serializedVersion: 2
         x: 512
@@ -160,20 +160,20 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0a8d645dbc15494480e759270709f30
-      internalID: -1498324359
+      spriteID: eaa1982551d880144b0d886a225bcb4c
+      internalID: -583722475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: j.S_3
+      name: j.S_Weapon_3
       rect:
         serializedVersion: 2
         x: 768
@@ -181,20 +181,20 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92181ce09b7b53043b4e6fd07069cc43
-      internalID: 309667814
+      spriteID: 10f54102a20734c429803ce41e6c1997
+      internalID: 2040147508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: j.S_4
+      name: j.S_Weapon_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -202,20 +202,20 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c96d0b7675e549649a2bbe8f5f7e81a6
-      internalID: 1090530495
+      spriteID: 98efaf9cf6426414081e778bcefaaffb
+      internalID: 1101588294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: j.S_5
+      name: j.S_Weapon_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -223,14 +223,14 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa13daaf2237fb14581b139180abb59e
-      internalID: 978906815
+      spriteID: d3e57b66b1477b04a9c8c34d44490323
+      internalID: -817019580
       vertices: []
       indices: 
       edges: []
@@ -244,16 +244,14 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 6dfc5033899b0df4fbd9664edbc76e72, type: 3}
-      name: _MaskTex
+    secondaryTextures: []
     nameFileIdTable:
-      j.S_0: -2028026909
-      j.S_1: 986259865
-      j.S_2: -1498324359
-      j.S_3: 309667814
-      j.S_4: 1090530495
-      j.S_5: 978906815
+      j.S_Weapon_0: 235485493
+      j.S_Weapon_1: 1691734850
+      j.S_Weapon_2: -583722475
+      j.S_Weapon_3: 2040147508
+      j.S_Weapon_4: 1101588294
+      j.S_Weapon_5: -817019580
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

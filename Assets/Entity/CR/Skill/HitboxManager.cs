@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CRHitbox : MonoBehaviour
+public class HitboxManager : MonoBehaviour
 {
     [SerializeField] private List<CollisionDetector> hitBoxes;
     [SerializeField] private List<CollisionDetector> damageBoxes;
-    public event System.Action<Enemy> OnEnemyHit;
-    private void Awake()
-    {
-        Initialize();
-    }
+    public event System.Action<CollisionDetector> OnEntityHit;
     private void OnDestroy()
     {
         Dispose();
     }
-    private void Initialize()
+    public void Initialize(Entity entity)
     {
+        hitBoxes.ForEach(h => h.SetOwner(entity));
+        damageBoxes.ForEach(d => d.SetOwner(entity));
         hitBoxes.ForEach(h => h.OnTriggerEnter += OnHitHandler);
         damageBoxes.ForEach(d => d.OnTriggerEnter += OnDamageHandler);
     }
@@ -31,6 +29,6 @@ public class CRHitbox : MonoBehaviour
     }
     public void OnDamageHandler(Collider2D collision)
     {
-        if (collision.TryGetComponent<Enemy>(out var enemy)) OnEnemyHit?.Invoke(enemy);
+        if (collision.TryGetComponent<CollisionDetector>(out var collisionDetector)) OnEntityHit?.Invoke(collisionDetector);
     }
 }

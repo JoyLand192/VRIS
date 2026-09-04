@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Facade Pattern
+//Mediator Pattern
 public class CR : Entity
 {
-    [field: SerializeField] public CRHitbox Hitbox { get; private set; }
+    [field: SerializeField] public HitboxManager Hitbox { get; private set; }
     [field: SerializeField] public CRInputHandler InputHandler { get; private set; }
     [field: SerializeField] public CRMovement Movement { get; private set; }
     [field: SerializeField] public CRStatus Status { get; private set; }
@@ -15,6 +15,7 @@ public class CR : Entity
 
     private void Awake()
     {
+        Hitbox.Initialize(this);
         Movement.Initialize(InputHandler, Animator);
         SkillCaster.Initialize(this);
         VFX.Initialize(Movement);

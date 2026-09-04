@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CRVFX : MonoBehaviour
 {
-    private const float wallSlideParticleInterval = 0.1f;
+    private const float wallSlideParticleInterval = 0.075f;
     [SerializeField] private AnimationEffect landingParticleEffect;
     [SerializeField] private AnimationEffect jumpingParticleEffect;
     [SerializeField] private AnimationEffect wallSlideParticleEffect;

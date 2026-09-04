@@ -50,8 +50,14 @@ TagManager:
   - name: VFXBehind
     uniqueID: 1634201663
     locked: 0
+  - name: Boss
+    uniqueID: 2781714491
+    locked: 0
   - name: CR
     uniqueID: 890704631
+    locked: 0
+  - name: Weapon
+    uniqueID: 1030493745
     locked: 0
   - name: VFX
     uniqueID: 2882821975

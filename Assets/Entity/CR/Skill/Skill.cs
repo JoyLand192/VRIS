@@ -13,17 +13,19 @@ public abstract class Skill : ScriptableObject
     {
         HashSet<Enemy> hitEnemies = new();
 
-        void OnEnemyHitHandler(Enemy enemy)
+        void OnEnemyHitHandler(CollisionDetector collisionDetector)
         {
+            if (collisionDetector.Owner is not Enemy enemy) return;
             if (!hitEnemies.Add(enemy)) return;
+
             HitEnemy(enemy, cr);
         }
         void Dispose()
         {
-            cr.Hitbox.OnEnemyHit -= OnEnemyHitHandler;
+            cr.Hitbox.OnEntityHit -= OnEnemyHitHandler;
             cr.SkillCaster.OnSkillEnd -= Dispose;
         }
-        cr.Hitbox.OnEnemyHit += OnEnemyHitHandler;
+        cr.Hitbox.OnEntityHit += OnEnemyHitHandler;
         cr.SkillCaster.OnSkillEnd += Dispose;
     }
     protected virtual void HitEnemy(Enemy enemy, CR caster)
