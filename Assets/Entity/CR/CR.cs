@@ -22,6 +22,7 @@ public class CR : Entity
 
         SkillCaster.OnSkillExecute += SkillExecuteHandler;
     }
+    public void ReceiveDamage(DamageInfo damageInfo) => Status.ReceiveDamage(damageInfo);
     private void SkillExecuteHandler(Skill skill)
     {
         skill.Initialize(this);

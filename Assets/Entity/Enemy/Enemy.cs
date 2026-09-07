@@ -9,6 +9,12 @@ public class Enemy : Entity
     private void Awake()
     {
         Hitbox.Initialize(this);
+
+        Hitbox.OnEntityHit += (collisionDetector) =>
+        {
+            if (collisionDetector.Owner is not CR cr) return;
+            cr.ReceiveDamage(new DamageInfo(this, 5));
+        };
     }
     public void ReceiveDamage(DamageInfo damageInfo)
     {
