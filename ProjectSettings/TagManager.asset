@@ -68,3 +68,6 @@ TagManager:
   - name: Hitboxes
     uniqueID: 201729267
     locked: 0
+  - name: ScreenEffects
+    uniqueID: 4219940969
+    locked: 0

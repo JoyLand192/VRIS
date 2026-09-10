@@ -22,7 +22,11 @@ public class CR : Entity
 
         SkillCaster.OnSkillExecute += SkillExecuteHandler;
     }
-    public void ReceiveDamage(DamageInfo damageInfo) => Status.ReceiveDamage(damageInfo);
+    public void ReceiveDamage(DamageInfo damageInfo)
+    {
+        Status.ReceiveDamage(damageInfo);
+        VFX.HurtFlash();
+    }
     private void SkillExecuteHandler(Skill skill)
     {
         skill.Initialize(this);
