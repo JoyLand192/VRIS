@@ -8,6 +8,7 @@ public abstract class Skill : ScriptableObject
     [field: SerializeField] public string SkillName { get; protected set; }
     [field: SerializeField] public bool MovementBlock { get; protected set; } = true;
     [field: SerializeField] public bool DashBlock { get; protected set; } = true;
+    [field: SerializeField] public bool CancelOnLand { get; protected set; } = true;
     public abstract UniTask Execute(CR cr);
     public virtual void Initialize(CR cr)
     {

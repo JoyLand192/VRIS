@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class AnimationEffect : MonoBehaviour
+public class AnimationEffect : Effect
 {
-    public AnimationEffect Prefab { get; private set; }
-    private Animator animator;
-    private System.Action<AnimationEffect> returnAction;
-    private void Awake()
+    protected Animator animator;
+    protected override void Awake()
     {
         animator = GetComponent<Animator>();
     }
-    public void Initialize(AnimationEffect keyPrefab, System.Action<AnimationEffect> returnAction)
-    {
-        this.returnAction = returnAction;
-        Prefab = keyPrefab;
-    }
-    public void Play()
+    public override void Play(EffectData effectData)
     {
         gameObject.SetActive(true);
         animator.Rebind();
     }
-    public void EffectEnd()
+    public override void EffectEnd()
     {
         gameObject.SetActive(false);
         returnAction?.Invoke(this);

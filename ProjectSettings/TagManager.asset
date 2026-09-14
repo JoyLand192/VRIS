@@ -56,6 +56,9 @@ TagManager:
   - name: BossWeapon
     uniqueID: 911784859
     locked: 0
+  - name: WeaponBehind
+    uniqueID: 2775900437
+    locked: 0
   - name: CR
     uniqueID: 890704631
     locked: 0

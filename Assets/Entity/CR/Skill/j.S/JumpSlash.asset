@@ -15,3 +15,5 @@ MonoBehaviour:
   <SkillName>k__BackingField: j.S
   <MovementBlock>k__BackingField: 0
   <DashBlock>k__BackingField: 1
+  <CancelOnLand>k__BackingField: 1
+  hitEffect: {fileID: 6947924036567235339, guid: 57815cc306556a145b7309e31268277b, type: 3}

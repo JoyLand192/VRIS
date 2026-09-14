@@ -14,7 +14,9 @@ public class Enemy : Entity
         Hitbox.OnEntityHit += (collisionDetector) =>
         {
             if (collisionDetector.Owner is not CR cr) return;
+
             cr.ReceiveDamage(new DamageInfo(this, 5));
+            TimeManager.Instance.HitStop(0.2f);
         };
     }
     public void ReceiveDamage(DamageInfo damageInfo)

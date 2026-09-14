@@ -13,6 +13,7 @@ public class CRAnimator : MonoBehaviour
     private static readonly int isGroundedHash = Animator.StringToHash(nameof(IsGrounded));
     public event System.Action OnCancelWindowOpen;
     public event System.Action OnSkillEnd;
+    public event System.Action OnSkillIntervalEnd;
     private int playerDirection;
     public int PlayerDirection
     {
@@ -57,4 +58,5 @@ public class CRAnimator : MonoBehaviour
     public void StopSkill() => rootAnimator.Play("Neutral", 0);
     public void OpenCancelWindow() => OnCancelWindowOpen?.Invoke();
     public void SkillEnd() => OnSkillEnd?.Invoke();
+    public void SkillIntervalEnd() => OnSkillIntervalEnd?.Invoke();
 }

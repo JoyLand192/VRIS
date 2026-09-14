@@ -41,10 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _HurtColorLerpRatio: 0.1
+    - _HurtColorLerpRatio: 0.22
     - _HurtFlashAmount: 0
     m_Colors:
-    - _HurtColor: {r: 7.0465865, g: 2.2269871, b: 2.6114056, a: 0}
+    - _HurtColor: {r: 3.0314326, g: 0.20807171, b: 0.18588983, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8028888034165937635
 MonoBehaviour:

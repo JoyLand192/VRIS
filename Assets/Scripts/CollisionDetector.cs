@@ -6,7 +6,6 @@ using UnityEngine;
 public class CollisionDetector : MonoBehaviour
 {
     private static readonly bool isVisible = false;
-    private Collider2D col;
     private bool isColliderEnabled;
     public bool IsColliderEnabled
     {
@@ -14,9 +13,10 @@ public class CollisionDetector : MonoBehaviour
         set
         {
             isColliderEnabled = value;
-            col.enabled = value;
+            Collider.enabled = value;
         }
     }
+    public Collider2D Collider { get; private set; }
     public Entity Owner { get; private set; }
     public event System.Action<Collision2D> OnCollisionEnter;
     public event System.Action<Collision2D> OnCollisionExit;
@@ -24,7 +24,7 @@ public class CollisionDetector : MonoBehaviour
     public event System.Action<Collider2D> OnTriggerExit;
     private void Awake()
     {
-        col = GetComponent<Collider2D>();
+        Collider = GetComponent<Collider2D>();
         if (isVisible && TryGetComponent<SpriteRenderer>(out var sprite)) sprite.enabled = true;
     }
     public void SetOwner(Entity entity) => Owner = entity;

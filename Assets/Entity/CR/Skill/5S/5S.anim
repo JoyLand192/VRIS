@@ -29,7 +29,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.083333336
-        value: {x: 2.09, y: 0.82, z: 0}
+        value: {x: 3.09, y: 0.82, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -55,7 +55,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.083333336
-        value: {x: 3.81, y: 1, z: 1}
+        value: {x: 6.87, y: 1.68, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -106,6 +106,36 @@ AnimationClip:
     classID: 1
     script: {fileID: 0}
     flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 8
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.625
+        value: 8
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Size.y
+    path: WeaponEffect
+    classID: 212
+    script: {fileID: 0}
+    flags: 0
   m_PPtrCurves:
   - serializedVersion: 2
     curve:
@@ -123,8 +153,42 @@ AnimationClip:
       value: {fileID: -1789414736, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
     - time: 0.5416667
       value: {fileID: -341495734, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
+    - time: 0.625
+      value: {fileID: -341495734, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
     attribute: m_Sprite
     path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 2138373194, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - time: 0.083333336
+      value: {fileID: -2082021029, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - time: 0.16666667
+      value: {fileID: 1651640346, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - time: 0.25
+      value: {fileID: 885475876, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - time: 0.375
+      value: {fileID: -1263225669, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - time: 0.45833334
+      value: {fileID: -1355999160, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - time: 0.5416667
+      value: {fileID: 2070079802, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    attribute: m_Sprite
+    path: WeaponEffect
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 6a15f9bf4872d4b45ae33f6cd576cd48, type: 2}
+    - time: 0.625
+      value: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    attribute: m_Materials.Array.data[0]
+    path: WeaponEffect
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -171,6 +235,33 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 243225541
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 243225541
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 21
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 243225541
+      attribute: 2368279999
+      script: {fileID: 0}
+      typeID: 212
+      customType: 0
+      isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: -1908824578, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
     - {fileID: 232307329, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
@@ -179,12 +270,22 @@ AnimationClip:
     - {fileID: -547489803, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
     - {fileID: -1789414736, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
     - {fileID: -341495734, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
+    - {fileID: -341495734, guid: 1db1df5ef054ea4429e6582a8d922824, type: 3}
+    - {fileID: 2138373194, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: -2082021029, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: 1651640346, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: 885475876, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: -1263225669, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: -1355999160, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: 2070079802, guid: df4592b1633c97b40b8e86130163906f, type: 3}
+    - {fileID: 2100000, guid: 6a15f9bf4872d4b45ae33f6cd576cd48, type: 2}
+    - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.625
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -254,7 +355,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: 2.09
+        value: 3.09
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -344,7 +445,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: 3.81
+        value: 6.87
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -374,7 +475,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: 1
+        value: 1.68
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -417,6 +518,36 @@ AnimationClip:
     attribute: m_LocalScale.z
     path: Hitboxes/DamageBox
     classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 8
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.625
+        value: 8
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Size.y
+    path: WeaponEffect
+    classID: 212
     script: {fileID: 0}
     flags: 0
   m_EulerEditorCurves: []

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JumpSlash
+  m_Name: CRSkillGlow
   m_Shader: {fileID: -6465566751694194690, guid: d228b6a0694c94f4288272abde9cec74, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -57,7 +57,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _MaskGlowColor: {r: 12.844468, g: 1.3449701, b: 7.8935885, a: 0}
+    - _MaskGlowColor: {r: 16.015934, g: 2.5994449, b: 0.41926518, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3108188428928196976

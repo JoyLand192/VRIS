@@ -109,7 +109,6 @@ public class CRSkillCaster : MonoBehaviour
     }
     public void OnCommandInput(CommandInputEntry inputEntry)
     {
-        //Debug.Log($"{(int)inputEntry.CommandKey} | {inputEntry.InputTime}");
         inputBuffer.Add(inputEntry);
 
         if (currentCommand != null && isCancelable)
@@ -135,6 +134,11 @@ public class CRSkillCaster : MonoBehaviour
             break;
         }
     }
+    public void CancelSkill()
+    {
+        if (currentCommand == null) return;
+        EndSkill();
+    }
     private void CastSkill(CommandData commandEntry)
     {
         if (cr.Movement.IsDashing) return;
@@ -159,6 +163,8 @@ public class CRSkillCaster : MonoBehaviour
     private void OnLandedHandler()
     {
         if (currentCommand == null) return;
+        if (!currentCommand.Skill.CancelOnLand) return;
+        
         EndSkill();
     }
     private void EndSkill()

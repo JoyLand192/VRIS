@@ -28,16 +28,15 @@ public class CRMovement : MonoBehaviour
     private const float platformRayLength = 0.1f;
     private const float wallRayLength = 0.15f;
     private const float groundedVelocityThreshold = 0.35f;
-    [SerializeField] private SurfaceLayerMaskSettings surfaceLayerMaskSettings;
     private float moveRatio = 0f;
-    private float moveRatioFixed = 1f;
     private float moveXInertia = 0f;
+    private float gravityScaleOrigin;
     private bool jumpTrigger = false;
     private bool dashTrigger = false;
     private bool sneakTrigger = false;
     private bool isSprinting = false;
     private int availableJumpCount = tempCRJumpCount;
-    private Rigidbody2D rb;
+    public Rigidbody2D Rb { get; protected set; }
     private BoxCollider2D col;
     private CRAnimator animator;
     // Blockers =====================================
@@ -80,6 +79,8 @@ public class CRMovement : MonoBehaviour
             animator.IsGrounded = value == SurfaceContact.GROUNDED;
         }
     }
+    [field: SerializeField] public SurfaceLayerMaskSettings SurfaceLayerMaskSettings { get; protected set; }
+    public float MoveRatioFixed { get; protected set; } = 1f;
     public int WallDirection { get; private set; }
     public event Action OnLanded;
     public event Action OnJumped;
@@ -88,8 +89,9 @@ public class CRMovement : MonoBehaviour
     public event Action<float> OnDash;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        Rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        gravityScaleOrigin = Rb.gravityScale;
     }
     public void Initialize(CRInputHandler inputHandler, CRAnimator animator)
     {
@@ -101,6 +103,15 @@ public class CRMovement : MonoBehaviour
         inputHandler.OnDashInput += OnDashInput;
         inputHandler.OnSprintInput += OnSprintInput;
     }
+    public void DisableGravity()
+    {
+        gravityScaleOrigin = Rb.gravityScale;
+        Rb.gravityScale = 0;
+    }
+    public void RestoreGravity()
+    {
+        Rb.gravityScale = gravityScaleOrigin;
+    }
     public void AddMoveBlocker(int amount)
     {
         var lockedIn = moveBlockerCount == 0 && moveBlockerCount + amount > 0;
@@ -109,7 +120,7 @@ public class CRMovement : MonoBehaviour
         if (lockedIn)
         {
             moveRatio = 0;
-            rb.velocity = Vector2.up * rb.velocity.y;
+            Rb.velocity = Vector2.up * Rb.velocity.y;
         }
     }
     public void AddDashBlocker(int amount) => dashBlockerCount = Mathf.Max(0, dashBlockerCount + amount);
@@ -120,7 +131,7 @@ public class CRMovement : MonoBehaviour
         if (IsDashing) return;
         if (value != 0)
         {
-            moveRatioFixed = value;
+            MoveRatioFixed = value;
             if (IsMovable && IsDirectionChangable) animator.PlayerDirection = (int)Mathf.Sign(value);
         }
         if (moveXInertia > 0) return;
@@ -142,7 +153,7 @@ public class CRMovement : MonoBehaviour
     private void FixedUpdate()
     {
         moveXInertia = Mathf.Max(0, moveXInertia - moveXInertiaReduction * Time.fixedDeltaTime);
-        animator.VelocityY = rb.velocity.y;
+        animator.VelocityY = Rb.velocity.y;
 
         Move();
         PlatformRaycast();
@@ -152,12 +163,12 @@ public class CRMovement : MonoBehaviour
     }
     private void PlatformRaycast()
     {
-        var platformLayer = surfaceLayerMaskSettings.PlatformLayer;
-        var wallLayer = surfaceLayerMaskSettings.WallLayer;
+        var platformLayer = SurfaceLayerMaskSettings.PlatformLayer;
+        var wallLayer = SurfaceLayerMaskSettings.WallLayer;
 
         var platformHit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0, Vector2.down, platformRayLength, platformLayer);
 
-        if (platformHit && rb.velocity.y <= groundedVelocityThreshold)
+        if (platformHit && Rb.velocity.y <= groundedVelocityThreshold)
         {
             if (CurrentContact != SurfaceContact.GROUNDED) OnLanded?.Invoke();
 
@@ -198,20 +209,20 @@ public class CRMovement : MonoBehaviour
         if (IsDashing) return;
         if (IsSneaking)
         {
-            rb.velocity = Vector2.up * rb.velocity.y;
+            Rb.velocity = Vector2.up * Rb.velocity.y;
             return;
         }
         if (CurrentContact == SurfaceContact.WALLCONTACT && IsHoldingWall()) WallSlide();
 
         var sprintRatio = isSprinting ? tempCRSprintMultiplier : 1;
         var finalMoveRatio = moveRatio * (tempCRMoveSpeed * sprintRatio + moveXInertia);
-        rb.velocity = new Vector2(finalMoveRatio, rb.velocity.y);
+        Rb.velocity = new Vector2(finalMoveRatio, Rb.velocity.y);
     }
-    private bool IsHoldingWall() => moveRatioFixed != 0 && Mathf.Sign(moveRatioFixed) == WallDirection;
+    private bool IsHoldingWall() => MoveRatioFixed != 0 && Mathf.Sign(MoveRatioFixed) == WallDirection;
     private void WallSlide()
     {
-        var fixedVelocityY = Mathf.Max(rb.velocity.y, -wallSlideVelocityY);
-        rb.velocity = new Vector2(0, fixedVelocityY);
+        var fixedVelocityY = Mathf.Max(Rb.velocity.y, -wallSlideVelocityY);
+        Rb.velocity = new Vector2(0, fixedVelocityY);
     }
     private void Jump()
     {
@@ -229,8 +240,8 @@ public class CRMovement : MonoBehaviour
 
         if (availableJumpCount < 1) return;
 
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * tempCRJumpPower, ForceMode2D.Impulse);
+        Rb.velocity = new Vector2(Rb.velocity.x, 0);
+        Rb.AddForce(Vector2.up * tempCRJumpPower, ForceMode2D.Impulse);
         OnJumped?.Invoke();
         availableJumpCount--;
     }
@@ -241,7 +252,7 @@ public class CRMovement : MonoBehaviour
         moveRatio = -WallDirection;
 
         var power = new Vector2(-WallDirection, 1.7f).normalized * tempCRJumpPower;
-        rb.velocity = power;
+        Rb.velocity = power;
         OnWallJump?.Invoke();
 
         moveXInertia = Mathf.Abs(power.x) - tempCRMoveSpeed;
@@ -262,26 +273,25 @@ public class CRMovement : MonoBehaviour
 
         availableJumpCount--;
 
-        var direction = moveRatioFixed;
+        var direction = MoveRatioFixed;
         var speedAfter = (jumpDashVelocityX - tempCRMoveSpeed) * jumpDashInertiaAfterRatio;
-        var gravityPrev = rb.gravityScale;
 
-        rb.gravityScale = 0;
+        DisableGravity();
         IsDashing = true;
         animator.DashState = 1;
-        rb.velocity *= 0.2f;
+        Rb.velocity *= 0.2f;
         OnDash?.Invoke(direction);
 
         await UniTask.Delay(TimeSpan.FromSeconds(jumpDashInterval));
 
-        rb.velocity = Vector2.right * (direction * jumpDashVelocityX);
+        Rb.velocity = Vector2.right * (direction * jumpDashVelocityX);
         animator.DashState = 2;
 
         await UniTask.Delay(TimeSpan.FromSeconds(jumpDashVelocityTime));
 
         moveXInertia = speedAfter;
         moveRatio = direction;
-        rb.gravityScale = gravityPrev;
+        RestoreGravity();
 
         IsDashing = false;
         animator.DashState = 0;
