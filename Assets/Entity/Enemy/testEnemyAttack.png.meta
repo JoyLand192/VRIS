@@ -244,7 +244,9 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 33f91ff64e8965c41931bd6544da5aa9, type: 3}
+      name: _MaskTex
     nameFileIdTable:
       testEnemyAttack_0: -1977753677
       testEnemyAttack_1: 646579182

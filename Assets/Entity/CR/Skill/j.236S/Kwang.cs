@@ -1,3 +1,4 @@
+using Cinemachine;
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ public class Kwang : Skill
 {
     [SerializeField] private LineEffect reachLineEffectPrefab;
     [SerializeField] private LayerMask targetHitboxLayers;
+    [SerializeField] private CinemachineImpulseDefinition cameraImpulseDefinition;
     private const string intervalAnimationStateName = "j_236SInterval";
     private const string animationStateName = "j_236S";
     private const float maxYDistance = 50f;
@@ -57,8 +59,9 @@ public class Kwang : Skill
             {
                 if (!enemy.transform.TryGetComponent<CollisionDetector>(out var hitbox)) continue;
                 OnEnemyHit(hitbox);
-            } 
+            }
 
+            cameraImpulseDefinition.CreateEvent(reachPos, Vector2.up);
             cr.VFX.GenerateSkillEffect(new EffectData(reachLineEffectPrefab, originPosition, reachPos));
             cr.transform.position = reachPos;
             cr.Animator.PlayState(animationStateName);
