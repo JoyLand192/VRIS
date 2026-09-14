@@ -8,6 +8,7 @@ using UnityEngine;
 public class Kwang : Skill
 {
     [SerializeField] private LineEffect reachLineEffectPrefab;
+    [SerializeField] private ParticleEffect reachParticleEffectPrefab;
     [SerializeField] private LayerMask targetHitboxLayers;
     [SerializeField] private CinemachineImpulseDefinition cameraImpulseDefinition;
     private const string intervalAnimationStateName = "j_236SInterval";
@@ -62,6 +63,8 @@ public class Kwang : Skill
             }
 
             cameraImpulseDefinition.CreateEvent(reachPos, Vector2.up);
+
+            cr.VFX.GenerateSkillEffect(new EffectData(reachParticleEffectPrefab, reachPos));
             cr.VFX.GenerateSkillEffect(new EffectData(reachLineEffectPrefab, originPosition, reachPos));
             cr.transform.position = reachPos;
             cr.Animator.PlayState(animationStateName);

@@ -17,6 +17,7 @@ MonoBehaviour:
   <DashBlock>k__BackingField: 1
   <CancelOnLand>k__BackingField: 0
   reachLineEffectPrefab: {fileID: 1386780534614468325, guid: 89cfb07091714e3438b6ffb9537d0553, type: 3}
+  reachParticleEffectPrefab: {fileID: 9133970084331688545, guid: ca979d73eb66eae438884a33d0aae784, type: 3}
   targetHitboxLayers:
     serializedVersion: 2
     m_Bits: 2048

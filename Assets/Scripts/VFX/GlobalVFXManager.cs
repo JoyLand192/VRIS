@@ -27,7 +27,7 @@ public class GlobalVFXManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
     }
-    public void GenerateAnimationEffect(EffectData effectData)
+    public void GenerateEffect(EffectData effectData)
     {
         var prefab = effectData.Prefab;
         if (!pools.ContainsKey(prefab)) pools.Add(prefab, new Queue<Effect>());

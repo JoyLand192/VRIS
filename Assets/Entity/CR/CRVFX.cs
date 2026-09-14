@@ -15,6 +15,8 @@ public class CRVFX : MonoBehaviour
     [SerializeField] private AnimationEffect wallJumpParticleEffect;
     [SerializeField] private AnimationEffect dashParticleEffect;
     [SerializeField] private IntEventChannel hurtFlashEventChannel;
+    [SerializeField] private Transform hitEffectPoint;
+    public Vector3 HitEffectPosition => hitEffectPoint.position;
     private CRMovement movement;
     private SpriteRenderer render;
     private float wallSlideParticleTimer = 0f;
@@ -31,7 +33,7 @@ public class CRVFX : MonoBehaviour
         {
             if (wallSlideParticleTimer <= 0f)
             {
-                GlobalVFXManager.Instance.GenerateAnimationEffect(new EffectData(wallSlideParticleEffect, transform.position, direction: movement.WallDirection));
+                GlobalVFXManager.Instance.GenerateEffect(new EffectData(wallSlideParticleEffect, transform.position, direction: movement.WallDirection));
                 wallSlideParticleTimer = wallSlideParticleInterval;
             }
             wallSlideParticleTimer -= Time.deltaTime;
@@ -55,7 +57,7 @@ public class CRVFX : MonoBehaviour
         movement.OnWallJump += PlayWallJumpEffect;
         movement.OnDash += PlayDashEffect;
     }
-    public void GenerateSkillEffect(EffectData data) => GlobalVFXManager.Instance.GenerateAnimationEffect(data);
+    public void GenerateSkillEffect(EffectData data) => GlobalVFXManager.Instance.GenerateEffect(data);
     public void HurtFlash()
     {
         hurtFlashAmount = 1f;
@@ -66,10 +68,10 @@ public class CRVFX : MonoBehaviour
 
         hurtFlashEventChannel.Raise(3);
     }
-    private void PlayLandingEffect() => GlobalVFXManager.Instance.GenerateAnimationEffect(new EffectData(landingParticleEffect, transform.position));
-    private void PlayJumpingEffect() => GlobalVFXManager.Instance.GenerateAnimationEffect(new EffectData(jumpingParticleEffect, transform.position));
-    private void PlayWallJumpEffect() => GlobalVFXManager.Instance.GenerateAnimationEffect(new EffectData(wallJumpParticleEffect, transform.position, direction: movement.WallDirection));
-    private void PlayDashEffect(float value) => GlobalVFXManager.Instance.GenerateAnimationEffect(new EffectData(dashParticleEffect, transform.position, direction: value >= 0 ? 1 : -1));
+    private void PlayLandingEffect() => GlobalVFXManager.Instance.GenerateEffect(new EffectData(landingParticleEffect, transform.position));
+    private void PlayJumpingEffect() => GlobalVFXManager.Instance.GenerateEffect(new EffectData(jumpingParticleEffect, transform.position));
+    private void PlayWallJumpEffect() => GlobalVFXManager.Instance.GenerateEffect(new EffectData(wallJumpParticleEffect, transform.position, direction: movement.WallDirection));
+    private void PlayDashEffect(float value) => GlobalVFXManager.Instance.GenerateEffect(new EffectData(dashParticleEffect, transform.position, direction: value >= 0 ? 1 : -1));
     private void WallSlideHandler(bool value)
     {
         if (wallSlideParticlePlaying == value) return;

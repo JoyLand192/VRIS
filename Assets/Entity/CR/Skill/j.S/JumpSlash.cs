@@ -10,6 +10,7 @@ namespace VRIS.Skills.TheNew
     public class JumpSlash : Skill
     {
         [SerializeField] private AnimationEffect hitEffect;
+        [SerializeField] private ParticleEffect hitParticleEffect;
         private const float hitStopDuration = 0.15f;
         private const string animationStateName = "j_S";
         public override UniTask Execute(CR cr)
@@ -22,7 +23,11 @@ namespace VRIS.Skills.TheNew
         {
             base.HitEnemy(enemy, caster);
 
-            GlobalVFXManager.Instance.GenerateAnimationEffect(new EffectData(hitEffect, enemy.Hitbox.ClosestHitboxPoint(caster.transform.position), direction: caster.Movement.MoveRatioFixed));
+            var effectPosition = enemy.Hitbox.ClosestHitboxPoint(caster.VFX.HitEffectPosition);
+            var effectDirection = caster.Movement.MoveRatioFixed;
+
+            caster.VFX.GenerateSkillEffect(new EffectData(hitParticleEffect, effectPosition, direction: effectDirection));
+            caster.VFX.GenerateSkillEffect(new EffectData(hitEffect, effectPosition, direction: effectDirection));
             TimeManager.Instance.HitStop(hitStopDuration);
         }
         protected override DamageInfo CalculateDamage(CR cr)

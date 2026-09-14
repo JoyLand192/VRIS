@@ -17,3 +17,4 @@ MonoBehaviour:
   <DashBlock>k__BackingField: 1
   <CancelOnLand>k__BackingField: 1
   hitEffect: {fileID: 6947924036567235339, guid: 57815cc306556a145b7309e31268277b, type: 3}
+  hitParticleEffect: {fileID: 9133970084331688545, guid: 0d4e49ebf41f9674c9d9bb1999574c55, type: 3}

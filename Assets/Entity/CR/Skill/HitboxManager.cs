@@ -20,7 +20,7 @@ public class HitboxManager : MonoBehaviour
         damageBoxes.ForEach(d => d.OnTriggerEnter += OnDamageHandler);
     }
     public Vector2 ClosestHitboxPoint(Vector2 origin) => hitBoxes
-        .Where(h => h.Collider != null)
+        .Where(h => h.Collider != null && h.gameObject.activeSelf)
         .Select(h => h.Collider.ClosestPoint(origin))
         .OrderBy(p => (p - origin).sqrMagnitude)
         .FirstOrDefault();
