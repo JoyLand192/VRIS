@@ -154,6 +154,15 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""6aac80d7-2166-4125-b1f1-7a77da9a71ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -332,6 +341,17 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
                     ""action"": ""Sneak"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ce9998b-430f-43a0-a59d-19aaeb7fd353"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -359,6 +379,7 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
         m_CRMovement_Move = m_CRMovement.FindAction("Move", throwIfNotFound: true);
         m_CRMovement_AttackKey = m_CRMovement.FindAction("AttackKey", throwIfNotFound: true);
         m_CRMovement_Sneak = m_CRMovement.FindAction("Sneak", throwIfNotFound: true);
+        m_CRMovement_Guard = m_CRMovement.FindAction("Guard", throwIfNotFound: true);
     }
 
     ~@CRActions()
@@ -446,6 +467,7 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_CRMovement_Move;
     private readonly InputAction m_CRMovement_AttackKey;
     private readonly InputAction m_CRMovement_Sneak;
+    private readonly InputAction m_CRMovement_Guard;
     /// <summary>
     /// Provides access to input actions defined in input action map "CRMovement".
     /// </summary>
@@ -485,6 +507,10 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "CRMovement/Sneak".
         /// </summary>
         public InputAction @Sneak => m_Wrapper.m_CRMovement_Sneak;
+        /// <summary>
+        /// Provides access to the underlying input action "CRMovement/Guard".
+        /// </summary>
+        public InputAction @Guard => m_Wrapper.m_CRMovement_Guard;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -532,6 +558,9 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
             @Sneak.started += instance.OnSneak;
             @Sneak.performed += instance.OnSneak;
             @Sneak.canceled += instance.OnSneak;
+            @Guard.started += instance.OnGuard;
+            @Guard.performed += instance.OnGuard;
+            @Guard.canceled += instance.OnGuard;
         }
 
         /// <summary>
@@ -564,6 +593,9 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
             @Sneak.started -= instance.OnSneak;
             @Sneak.performed -= instance.OnSneak;
             @Sneak.canceled -= instance.OnSneak;
+            @Guard.started -= instance.OnGuard;
+            @Guard.performed -= instance.OnGuard;
+            @Guard.canceled -= instance.OnGuard;
         }
 
         /// <summary>
@@ -666,5 +698,12 @@ public partial class @CRActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSneak(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Guard" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGuard(InputAction.CallbackContext context);
     }
 }

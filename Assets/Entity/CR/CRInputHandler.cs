@@ -41,6 +41,7 @@ public class CRInputHandler : MonoBehaviour
     public System.Action<bool> OnSneakInput;
     public System.Action OnJumpInput;
     public System.Action OnDashInput;
+    [SerializeField] private ShieldAnimator TEMPSHIELD;
     private void OnEnable()
     {
         InputInitialize();
@@ -69,6 +70,18 @@ public class CRInputHandler : MonoBehaviour
         crMovement.Sneak.performed += SneakKeyHandler;
         crMovement.Sneak.canceled += SneakKeyHandler;
         crMovement.Dash.performed += DashKeyHandler;
+
+        //REMOVE THIS
+        crMovement.Guard.performed += (x) =>
+        {
+            Debug.Log($"guardOn");
+            TEMPSHIELD.Play();
+        };
+        crMovement.Guard.canceled += (x) =>
+        {
+            Debug.Log($"guardOff");
+            TEMPSHIELD.Disappear();
+        };
     }
     private void InputDispose()
     {
