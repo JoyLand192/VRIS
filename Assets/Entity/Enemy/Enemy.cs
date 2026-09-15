@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : Entity
+{
+    [field: SerializeField] public HitboxManager Hitbox { get; protected set; }
+    [field: SerializeField] public EnemyStatus Status { get; protected set; }
+    [field: SerializeField] public EnemyVFX VFX { get; protected set; }
+    private void Awake()
+    {
+        Hitbox.Initialize(this);
+
+        Hitbox.OnEntityHit += (collisionDetector) =>
+        {
+            if (collisionDetector.Owner is not CR cr) return;
+
+            cr.ReceiveDamage(new DamageInfo(this, 5));
+            TimeManager.Instance.HitStop(0.2f);
+        };
+    }
+    public void ReceiveDamage(DamageInfo damageInfo)
+    {
+        Status.ReceiveDamage(damageInfo);
+        VFX.HurtFlash();
+    }
+}

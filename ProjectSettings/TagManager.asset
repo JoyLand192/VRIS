@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - SoftPlatform
+  - HardPlatform
+  - Wall
+  - CRHitbox
+  - CRDamageBox
+  - EnemyHitbox
+  - EnemyDamageBox
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Platform
+    uniqueID: 345111251
+    locked: 0
+  - name: Enemy
+    uniqueID: 1883523471
+    locked: 0
+  - name: VFXBehind
+    uniqueID: 1634201663
+    locked: 0
+  - name: Boss
+    uniqueID: 2781714491
+    locked: 0
+  - name: BossWeapon
+    uniqueID: 911784859
+    locked: 0
+  - name: WeaponBehind
+    uniqueID: 2775900437
+    locked: 0
+  - name: CR
+    uniqueID: 890704631
+    locked: 0
+  - name: Weapon
+    uniqueID: 1030493745
+    locked: 0
+  - name: VFX
+    uniqueID: 2882821975
+    locked: 0
+  - name: Hitboxes
+    uniqueID: 201729267
+    locked: 0
+  - name: ScreenEffects
+    uniqueID: 4219940969
+    locked: 0

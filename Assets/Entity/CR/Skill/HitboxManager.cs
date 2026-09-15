@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class HitboxManager : MonoBehaviour
+{
+    [SerializeField] private List<CollisionDetector> hitBoxes = new();
+    [SerializeField] private List<CollisionDetector> damageBoxes = new();
+    public event System.Action<CollisionDetector> OnEntityHit;
+    private void OnDestroy()
+    {
+        Dispose();
+    }
+    public void Initialize(Entity entity)
+    {
+        hitBoxes.ForEach(h => h.SetOwner(entity));
+        damageBoxes.ForEach(d => d.SetOwner(entity));
+        hitBoxes.ForEach(h => h.OnTriggerEnter += OnHitHandler);
+        damageBoxes.ForEach(d => d.OnTriggerEnter += OnDamageHandler);
+    }
+    public Vector2 ClosestHitboxPoint(Vector2 origin) => hitBoxes
+        .Where(h => h.Collider != null && h.gameObject.activeSelf)
+        .Select(h => h.Collider.ClosestPoint(origin))
+        .OrderBy(p => (p - origin).sqrMagnitude)
+        .FirstOrDefault();
+    private void Dispose()
+    {
+        hitBoxes.ForEach(h => h.OnTriggerEnter -= OnHitHandler);
+        damageBoxes.ForEach(d => d.OnTriggerEnter -= OnDamageHandler);
+    }
+    public void OnHitHandler(Collider2D collision)
+    {
+
+    }
+    public void OnDamageHandler(Collider2D collision)
+    {
+        if (collision.TryGetComponent<CollisionDetector>(out var collisionDetector)) OnEntityHit?.Invoke(collisionDetector);
+    }
+}
