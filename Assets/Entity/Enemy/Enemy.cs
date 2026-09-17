@@ -15,8 +15,9 @@ public class Enemy : Entity
         {
             if (collisionDetector.Owner is not CR cr) return;
 
-            cr.ReceiveDamage(new DamageInfo(this, 5));
-            TimeManager.Instance.HitStop(0.2f);
+            var result = cr.ReceiveDamage(new DamageInfo(this, 5));
+            if (result == DamageReceiveResult.Hit) TimeManager.Instance.HitStop(0.2f);
+            else TimeManager.Instance.HitStop(0.1f);
         };
     }
     public void ReceiveDamage(DamageInfo damageInfo)

@@ -27,6 +27,8 @@ public class TimeManager : MonoBehaviour
     }
     private async UniTaskVoid ActivateHitStop(float duration)
     {
+        await UniTask.Yield(timing: PlayerLoopTiming.Update, cancellationToken: cts.Token);
+
         Time.timeScale = 0f;
         try
         {

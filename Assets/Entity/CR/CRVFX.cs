@@ -16,6 +16,7 @@ public class CRVFX : MonoBehaviour
     [SerializeField] private AnimationEffect dashParticleEffect;
     [SerializeField] private IntEventChannel hurtFlashEventChannel;
     [SerializeField] private Transform hitEffectPoint;
+    [SerializeField] private GuardAnimator guardAnimator;
     public Vector3 HitEffectPosition => hitEffectPoint.position;
     private CRMovement movement;
     private SpriteRenderer render;
@@ -55,6 +56,7 @@ public class CRVFX : MonoBehaviour
         movement.OnJumped += PlayJumpingEffect;
         movement.OnWallSlide += WallSlideHandler;
         movement.OnWallJump += PlayWallJumpEffect;
+        movement.OnGuard += ActivateGuardEffect;
         movement.OnDash += PlayDashEffect;
     }
     public void GenerateSkillEffect(EffectData data) => GlobalVFXManager.Instance.GenerateEffect(data);
@@ -72,6 +74,11 @@ public class CRVFX : MonoBehaviour
     private void PlayJumpingEffect() => GlobalVFXManager.Instance.GenerateEffect(new EffectData(jumpingParticleEffect, transform.position));
     private void PlayWallJumpEffect() => GlobalVFXManager.Instance.GenerateEffect(new EffectData(wallJumpParticleEffect, transform.position, direction: movement.WallDirection));
     private void PlayDashEffect(float value) => GlobalVFXManager.Instance.GenerateEffect(new EffectData(dashParticleEffect, transform.position, direction: value >= 0 ? 1 : -1));
+    private void ActivateGuardEffect(bool value)
+    {
+        if (value) guardAnimator.Play();
+        else guardAnimator.Disappear();
+    }
     private void WallSlideHandler(bool value)
     {
         if (wallSlideParticlePlaying == value) return;

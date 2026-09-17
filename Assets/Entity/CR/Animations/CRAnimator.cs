@@ -11,6 +11,7 @@ public class CRAnimator : MonoBehaviour
     private static readonly int velocityYHash = Animator.StringToHash(nameof(VelocityY));
     private static readonly int isSneakingHash = Animator.StringToHash(nameof(IsSneaking));
     private static readonly int isGroundedHash = Animator.StringToHash(nameof(IsGrounded));
+    private static readonly int isGuardingHash = Animator.StringToHash(nameof(IsGuarding));
     public event System.Action OnCancelWindowOpen;
     public event System.Action OnSkillEnd;
     public event System.Action OnSkillIntervalEnd;
@@ -53,6 +54,12 @@ public class CRAnimator : MonoBehaviour
     {
         get => rootAnimator.GetBool(isGroundedHash);
         set => rootAnimator.SetBool(isGroundedHash, value);
+    }
+    public bool IsGuarding
+    {
+        //get => rootAnimator.GetBool(isGuardingHash);
+        //set => rootAnimator.SetBool(isGuardingHash, value);
+        get; set;
     }
     public void PlayState(string stateName) => rootAnimator.Play(stateName);
     public void StopSkill() => rootAnimator.Play("Neutral", 0);

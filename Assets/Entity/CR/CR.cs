@@ -22,10 +22,23 @@ public class CR : Entity
 
         SkillCaster.OnSkillExecute += SkillExecuteHandler;
     }
-    public void ReceiveDamage(DamageInfo damageInfo)
+    [SerializeField] private ScreenEffectUI seui;
+    private readonly Color guardFlashColor = new(0.59f, 0.95f, 1.0f);
+    public DamageReceiveResult ReceiveDamage(DamageInfo damageInfo)
     {
+        if (Movement.IsGuarding)
+        {
+            Status.GuardGauge -= 15;
+            Status.ReceiveDamage(damageInfo.Scale(1));
+            seui.FlashScreen(guardFlashColor, 1);
+            
+            return DamageReceiveResult.Guard;
+        }
+
         Status.ReceiveDamage(damageInfo);
         VFX.HurtFlash();
+
+        return DamageReceiveResult.Hit;
     }
     private void SkillExecuteHandler(Skill skill)
     {

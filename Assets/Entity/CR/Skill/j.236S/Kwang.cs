@@ -14,6 +14,7 @@ public class Kwang : Skill
     private const string intervalAnimationStateName = "j_236SInterval";
     private const string animationStateName = "j_236S";
     private const float maxYDistance = 50f;
+    private const float hitStopDuration = 0.1f;
     public override UniTask Execute(CR cr)
     {
         if (!CanReachPlatform(cr, out _))
@@ -68,6 +69,7 @@ public class Kwang : Skill
             cr.VFX.GenerateSkillEffect(new EffectData(reachLineEffectPrefab, originPosition, reachPos));
             cr.transform.position = reachPos;
             cr.Animator.PlayState(animationStateName);
+            if (hitEnemyHitboxes.Length != 0) TimeManager.Instance.HitStop(hitStopDuration);
 
             cr.SkillCaster.OnSkillEnd += Dispose;
         }
@@ -87,6 +89,6 @@ public class Kwang : Skill
     }
     protected override DamageInfo CalculateDamage(CR cr)
     {
-        return new DamageInfo(cr, 25);
+        return new DamageInfo(cr, 45);
     }
 }

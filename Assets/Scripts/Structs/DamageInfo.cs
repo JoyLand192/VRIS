@@ -11,4 +11,9 @@ public struct DamageInfo
         this.Caster = Caster;
         this.Damage = Damage;
     }
+    public DamageInfo Scale(float Scale)
+    {
+        Damage *= Scale;
+        return this;
+    }
 }

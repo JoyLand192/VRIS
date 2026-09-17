@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class CRMovement : MonoBehaviour
 {
     public enum SurfaceContact
@@ -69,6 +69,18 @@ public class CRMovement : MonoBehaviour
             animator.IsSneaking = value;
         }
     }
+    [SerializeField] private bool isGuarding = false;
+    public bool IsGuarding
+    {
+        get => isGuarding;
+        set
+        {
+            if (isGuarding != value) OnGuard?.Invoke(value);
+
+            isGuarding = value;
+            animator.IsGuarding = value;
+        }
+    }
     [SerializeField] private SurfaceContact currentContact = SurfaceContact.AIRBORNE;
     public SurfaceContact CurrentContact
     {
@@ -84,8 +96,9 @@ public class CRMovement : MonoBehaviour
     public int WallDirection { get; private set; }
     public event Action OnLanded;
     public event Action OnJumped;
-    public event Action<bool> OnWallSlide;
     public event Action OnWallJump;
+    public event Action<bool> OnWallSlide;
+    public event Action<bool> OnGuard;
     public event Action<float> OnDash;
     private void Awake()
     {
@@ -102,6 +115,7 @@ public class CRMovement : MonoBehaviour
         inputHandler.OnSneakInput += OnSneakInput;
         inputHandler.OnDashInput += OnDashInput;
         inputHandler.OnSprintInput += OnSprintInput;
+        inputHandler.OnGuardInput += OnGuardInput;
     }
     public void DisableGravity()
     {
@@ -146,6 +160,10 @@ public class CRMovement : MonoBehaviour
     private void OnSneakInput(bool value)
     {
         sneakTrigger = value;
+    }
+    private void OnGuardInput(bool value)
+    {
+        IsGuarding = value; // REMOVE THIS
     }
     private void OnJumpInput() => jumpTrigger = true;
     private void OnDashInput() => dashTrigger = true;

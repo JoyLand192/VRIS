@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class ShieldAnimator : MonoBehaviour
+public class GuardAnimator : MonoBehaviour
 {
+    [SerializeField] List<Sprite> guardSprites = new();
+    [SerializeField] private IntEventChannel guardDurabilityEventChannel;
     private SpriteRenderer render;
     private Tween justTween;
     private Tween alphaTween;
@@ -16,6 +18,8 @@ public class ShieldAnimator : MonoBehaviour
     {
         render = GetComponent<SpriteRenderer>();
         mpb = new();
+
+        guardDurabilityEventChannel.OnRaised += SetSprite;
     }
     public void Disappear(float duration = 0.4f)
     {
@@ -35,18 +39,15 @@ public class ShieldAnimator : MonoBehaviour
             () => GetFloatValue(justProgressFieldID),
             (x) => SetFloatValue(justProgressFieldID, x), 1, duration);
     }
+    public void SetSprite(int state) => render.sprite = guardSprites[Mathf.Clamp(state, 0, guardSprites.Count - 1)];
     private float GetFloatValue(int id)
     {
         render.GetPropertyBlock(mpb);
-        //if (!mpb.HasProperty(id)) return default;
-
         return mpb.GetFloat(id);
     }
     private void SetFloatValue(int id, float value)
     {
         render.GetPropertyBlock(mpb);
-        //if (!mpb.HasProperty(id)) return;
-
         mpb.SetFloat(id, value);
         render.SetPropertyBlock(mpb);
     }

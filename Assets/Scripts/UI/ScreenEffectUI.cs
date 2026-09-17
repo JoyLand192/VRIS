@@ -12,10 +12,17 @@ public class ScreenEffectUI : MonoBehaviour
     {
         hurtFlashEventChannel.OnRaised += HurtFlash;
     }
-    public void HurtFlash(int intensity)
+    public void HurtFlash(int intensity) => FlashScreen(Color.red, intensity);
+    public void FlashScreen(Color color, int intensity)
     {
+        var startColor = color;
+        var endColor = color;
+
+        startColor.a = intensity * 0.25f;
+        endColor.a = 0;
+
         hurtFlashImage.DOKill();
-        hurtFlashImage.color = new Color(1f, 0f, 0f, intensity * 0.25f);
-        hurtFlashImage.DOColor(new Color(1f, 0f, 0f, 0f), 0.5f + intensity * 0.125f);
+        hurtFlashImage.color = startColor;
+        hurtFlashImage.DOColor(endColor, 0.5f + intensity * 0.125f);
     }
 }

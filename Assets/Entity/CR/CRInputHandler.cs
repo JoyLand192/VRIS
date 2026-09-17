@@ -41,7 +41,8 @@ public class CRInputHandler : MonoBehaviour
     public System.Action<bool> OnSneakInput;
     public System.Action OnJumpInput;
     public System.Action OnDashInput;
-    [SerializeField] private ShieldAnimator TEMPSHIELD;
+    public System.Action<bool> OnGuardInput;
+    [SerializeField] private GuardAnimator TEMPSHIELD;
     private void OnEnable()
     {
         InputInitialize();
@@ -71,17 +72,8 @@ public class CRInputHandler : MonoBehaviour
         crMovement.Sneak.canceled += SneakKeyHandler;
         crMovement.Dash.performed += DashKeyHandler;
 
-        //REMOVE THIS
-        crMovement.Guard.performed += (x) =>
-        {
-            Debug.Log($"guardOn");
-            TEMPSHIELD.Play();
-        };
-        crMovement.Guard.canceled += (x) =>
-        {
-            Debug.Log($"guardOff");
-            TEMPSHIELD.Disappear();
-        };
+        crMovement.Guard.performed += GuardKeyHandler;
+        crMovement.Guard.canceled += GuardKeyHandler;
     }
     private void InputDispose()
     {
@@ -95,6 +87,9 @@ public class CRInputHandler : MonoBehaviour
         crMovement.Sneak.performed -= SneakKeyHandler;
         crMovement.Sneak.canceled -= SneakKeyHandler;
         crMovement.Dash.performed -= DashKeyHandler;
+
+        crMovement.Guard.performed -= GuardKeyHandler;
+        crMovement.Guard.canceled -= GuardKeyHandler;
     }
     private void DPadHandler(InputAction.CallbackContext context)
     {
@@ -134,6 +129,12 @@ public class CRInputHandler : MonoBehaviour
         var performedValue = context.ReadValue<float>();
         var isSneaking = performedValue > 0;
         OnSneakInput?.Invoke(isSneaking);
+    }
+    private void GuardKeyHandler(InputAction.CallbackContext context)
+    {
+        var performedValue = context.ReadValue<float>();
+        var isGuarding = performedValue > 0;
+        OnGuardInput?.Invoke(isGuarding);
     }
     private void JumpKeyHandler(InputAction.CallbackContext context) => OnJumpInput?.Invoke();
     private void DashKeyHandler(InputAction.CallbackContext context) => OnDashInput?.Invoke();
